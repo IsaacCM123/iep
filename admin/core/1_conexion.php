@@ -4,7 +4,7 @@ $port = getenv('DB_PORT');
 $user = getenv('DB_USER');
 $pass = getenv('DB_PASS');
 $db   = getenv('DB_NAME');
-$ssl  = __DIR__ . '../../BD/cert/globalsignrootca.pem';
+$ssl  = __DIR__ . '/../../BD/cert/globalsignrootca.pem';
 
 $conexion = mysqli_init();
 
