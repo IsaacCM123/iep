@@ -6,7 +6,7 @@ $Seleccionar = "SELECT nombreCompleto, dniPastor FROM tbl_pastor";
 $N_C = isset($_POST['N']) ? $conexion->real_escape_string($_POST['N']) : null;
     if ($N_C != null)
     {
-       $Seleccionar = "SELECT nombreCompleto FROM tbl_pastor WHERE nombreCompleto LIKE '%".$N_C."%'";
+       $Seleccionar = "SELECT dniPastor, nombreCompleto FROM tbl_pastor WHERE nombreCompleto LIKE '%".$N_C."%'";
     }
 //............................................................................................
 
