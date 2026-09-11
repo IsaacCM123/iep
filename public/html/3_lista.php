@@ -1,6 +1,6 @@
 <?php
 require __DIR__ . '/../../admin/core/1_conexion.php';
-$Seleccionar = "SELECT nombreCompleto FROM tbl_pastor";
+$Seleccionar = "SELECT nombreCompleto, dniPastor FROM tbl_pastor";
 
 //keyup para buscar nombre desde campo de texto N.............................................
 $N_C = isset($_POST['N']) ? $conexion->real_escape_string($_POST['N']) : null;
@@ -16,6 +16,7 @@ $HTML = '';
 if ($resultado) {
     while ($fila = mysqli_fetch_assoc($resultado)) {
         $HTML       .= "<tr align='center'>";
+        $HTML       .= "<td>".$fila['dniPastor']."</td>";
         $HTML       .= "<td onclick='obtenerDato(this)'>".$fila['nombreCompleto']."</td>";
         $HTML       .= "</tr>";
     }
