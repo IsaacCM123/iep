@@ -1,5 +1,5 @@
 <?php
-require '/../../admin/core/1_conexion.php';
+require __DIR__ . '/../../admin/core/1_conexion.php';
 $Seleccionar = "SELECT nombreCompleto FROM tbl_pastor";
 
 //keyup para buscar nombre desde campo de texto N.............................................
