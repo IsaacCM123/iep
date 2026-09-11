@@ -34,6 +34,12 @@
             let url         = '3_lista.php'
             let formaData   = new FormData()
             formaData.append('N', camptext)
+
+            // ← aquí agregamos la limpieza
+            if (camptext === '' || camptext === null) {
+                document.getElementById('dniLabel').innerHTML = '0'
+            }
+
             fetch(url, {
                 method: 'POST',
                 body: formaData
