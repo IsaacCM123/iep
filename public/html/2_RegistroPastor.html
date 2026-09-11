@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+	<h3>Plataforma Pastor</h3>
+	<input type="text" name="N" id="nombreID" placeholder="Nombre...">
+	<label>0</label>
+
+	<table id="tabla">
+		<thead>Lista de Pastores</thead>
+		<tbody id="cuerpo"><!--Aqui se insertara la lista de pastores con .JSON--></tbody>
+	</table>
+
+	<script>
+        function obtenerDato(datoColumna){
+            let campoID         = document.getElementById('nombreID')
+            let datoObtenido    = datoColumna.innerHTML
+            campoID.value       = datoObtenido}
+    </script>
+
+    <script>
+        getData()
+        document.getElementById('nombreID').addEventListener('keyup', getData)
+        function getData(){
+            let camptext    = document.getElementById('nombreID').value
+            let cuerpoTBL   = document.getElementById('cuerpo')
+            let url         = '3_lista.php'
+            let formaData   = new FormData()
+            formaData.append('N', camptext)
+            fetch(url, {
+                method: 'POST',
+                body: formaData
+            }).then(response => response.json())
+            .then(data => {
+                cuerpoTBL.innerHTML = data
+            })
+        }
+    </script>
+</body>
+</html>
