@@ -11,6 +11,6 @@ $conexion = mysqli_init();
 mysqli_ssl_set($conexion,NULL,NULL,$ssl,NULL,NULL);
 
 $exito = mysqli_real_connect($conexion,$host,$user,$pass,$db,(int)$port,NULL,MYSQLI_CLIENT_SSL);
-if ($exito) { die('Conexion Exitosa'); } else{ die('Error en conexion'); }
+if (!$exito) { die('Error en conexion'); }
 // El archivo que haga "require" será responsable de cerrarla con mysqli_close($conexion) al terminar.
 ?>
