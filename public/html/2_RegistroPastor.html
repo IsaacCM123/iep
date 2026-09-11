@@ -8,7 +8,7 @@
 <body>
 	<h3>Plataforma Pastor</h3>
 	<input type="text" name="N" id="nombreID" placeholder="Nombre...">
-	<label>0</label>
+	<label id="dniLabel">0</label>
 
 	<table id="tabla">
 		<thead>Lista de Pastores</thead>
@@ -16,10 +16,13 @@
 	</table>
 
 	<script>
-        function obtenerDato(datoColumna){
+        function obtenerDato(fila){
             let campoID         = document.getElementById('nombreID')
-            let datoObtenido    = datoColumna.innerHTML
-            campoID.value       = datoObtenido}
+            let labelDNI        = document.getElementById('dniLabel')
+
+            labelDNI.innerHTML = fila.cells[0].innerHTML//Por que es label. fila.cells[0] = DNI (primera celda)
+            campoID.value      = fila.cells[1].innerHTML//Por que es input. fila.cells[1] = Nombre (segunda celda)
+        }
     </script>
 
     <script>

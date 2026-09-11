@@ -16,14 +16,14 @@ $resultado = mysqli_query($conexion, $Seleccionar);
 $HTML = '';
 if ($resultado) {
     while ($fila = mysqli_fetch_assoc($resultado)) {
-        $HTML       .= "<tr align='center'>";
+        $HTML       .= "<tr align='center' onclick='obtenerDato(this)'>";
         $HTML       .= "<td>".$fila['dniPastor']."</td>";
-        $HTML       .= "<td onclick='obtenerDato(this)'>".$fila['nombreCompleto']."</td>";
+        $HTML       .= "<td>".$fila['nombreCompleto']."</td>";
         $HTML       .= "</tr>";
     }
 } else {
     echo "Error en la consulta: " . mysqli_error($conexion);
 }
-//mysqli_close($conexion);
+mysqli_close($conexion);
 echo json_encode($HTML, JSON_UNESCAPED_UNICODE);
 ?>
