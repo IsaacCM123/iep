@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../../admin/core/1_conexion.php';
+require __DIR__ . '/../core/1_conexion.php';
 
 $Seleccionar = "SELECT dniPastor,nombreCompleto FROM tbl_pastor";
 
@@ -14,16 +14,14 @@ $N_C = isset($_POST['N']) ? $conexion->real_escape_string($_POST['N']) : null;
 
 $resultado = mysqli_query($conexion, $Seleccionar);
 $HTML = '';
-if ($resultado) {
+if($resultado){
     while ($fila = mysqli_fetch_assoc($resultado)) {
         $HTML       .= "<tr align='center' onclick='obtenerDato(this)'>";
         $HTML       .= "<td>".$fila['dniPastor']."</td>";
         $HTML       .= "<td>".$fila['nombreCompleto']."</td>";
-        $HTML       .= "</tr>";
-    }
-} else {
-    echo "Error en la consulta: " . mysqli_error($conexion);
-}
+        $HTML       .= "</tr>";}
+} 
+else {echo "Error en la consulta: " . mysqli_error($conexion);}
 mysqli_close($conexion);
 echo json_encode($HTML, JSON_UNESCAPED_UNICODE);
 ?>

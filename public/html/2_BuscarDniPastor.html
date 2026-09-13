@@ -4,10 +4,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
+    <style>body{background: goldenrod;}</style>
 </head>
 <body>
-	<h3>Plataforma Pastor</h3>
-	<input type="text" name="N" id="nombreID" placeholder="Nombre...">
+	<input type="text" name="N" id="nombreID" placeholder="Nombre..."><br>
 	<label id="dniLabel">0</label>
 
 	<table id="tabla">
@@ -31,7 +31,7 @@
         function getData(){
             let camptext    = document.getElementById('nombreID').value
             let cuerpoTBL   = document.getElementById('cuerpo')
-            let url         = '3_lista.php'
+            let url         = '../../admin/query/3_ListaSeleccionarPastor.php'
             let formaData   = new FormData()
             formaData.append('N', camptext)
 
