@@ -4,14 +4,14 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
-    <style>body{background: goldenrod;}</style>
+    <style>body{background: palegoldenrod;}</style>
 </head>
 <body>
-	<input type="text" name="N" id="nombreID" placeholder="Nombre..."><br>
+	<input type="text" name="nombrePOST" id="nombreID" placeholder="Nombre..."><br>
 	<label id="dniLabel">0</label><br><br>
 
 	<table id="tabla">
-		<thead>Lista de Pastores</thead>
+		<thead>Lista de Pastores...</thead>
 		<tbody id="cuerpo"><!--Aqui se insertara la lista de pastores con .JSON--></tbody>
 	</table>
 
@@ -33,7 +33,7 @@
             let cuerpoTBL   = document.getElementById('cuerpo')
             let url         = '../../admin/query/3_ListaSeleccionarPastor.php'
             let formaData   = new FormData()
-            formaData.append('N', camptext)
+            formaData.append('nombrePOST', camptext)
 
             // ← aquí agregamos la limpieza
             if (camptext === '' || camptext === null) {
