@@ -1,8 +1,5 @@
 Dominio generado por railway:
 iep-production-0509.up.railway.app
-iep-production-0509.up.railway.app
-
-Devolber este proyecto a escritorio, para subir a la nuve RAILWAY
 
 Eliminar todos los registros de una tabla y reiniciar el contador del AUTO_INCREMENT desde cero, usando el comando TRUNCATE TABLE
 SIEMPRE Y CUANDO NO TENGA ON DELETE CASCADE, ON UPDATE CASCADE:

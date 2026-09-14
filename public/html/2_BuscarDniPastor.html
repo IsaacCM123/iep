@@ -7,20 +7,17 @@
     <style>
         #dniID{
             border: none !important;
-            /*outline: none !important;*/
-            font-size: 2em;
-            width:fit-content;
+            outline: none !important;
         }
     </style>
 </head>
 <body>
-    <form method="GET" action="../../admin/query/4_SeleccionarDelegacion.php">
+    <form method="POST" action="../../admin/query/4_SeleccionarDelegacion.php">
         <input type="text" name="nombrePOST" id="nombreID" placeholder="Nombre..." autofocus autocomplete="off"><br><br>
         <input type="text" name="dniPOST" id="dniID" placeholder="0" readonly><br><br>
         <button type="submit">Ver Delegacion</button>
     </form>
 
-    <center><h4>Lista de Pastores</h4></center>
 	<table id="tabla" align='center'>
 		<thead align='center'>
             <tr><th>DNI Pastor</th><th>Nombre Completo</th></tr>
