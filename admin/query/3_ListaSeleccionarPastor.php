@@ -3,7 +3,7 @@ require __DIR__ . '/../core/1_conexion.php';
 
 $Seleccionar = "SELECT dniPastor,nombreCompleto FROM tbl_pastor";
 
-//keyup para buscar nombre desde campo de texto N.............................................
+//keyup para buscar nombre desde campo de texto nombrePOST ...................................
 $N_C = isset($_POST['nombrePOST']) ? $conexion->real_escape_string($_POST['nombrePOST']) : null;
     if ($N_C != null)
     {

@@ -8,12 +8,12 @@
 <body>
     <form method="POST" action="../../admin/query/4_SeleccionarDelegacion.php">
         <input type="text" name="nombrePOST" id="nombreID" placeholder="Nombre..." autofocus autocomplete="off"><br>
-        <label id="dniLabel">0</label><br><br>
+        <input type="text" name="dniPOST" id="dniID" placeholder="0" readonly><br><br>
         <button type="submit">Ver Delegacion</button>
     </form>
 
 	<table id="tabla">
-		<thead>
+		<thead align='center'>
             Lista de Pastores
             <tr><th>DNI Pastor</th><th>Nombre Completo</th></tr>
         </thead>
@@ -23,10 +23,10 @@
 	<script>
         function obtenerDato(fila){
             let campoID         = document.getElementById('nombreID')
-            let labelDNI        = document.getElementById('dniLabel')
+            let campoDNI        = document.getElementById('dniID')
 
-            labelDNI.innerHTML = fila.cells[0].innerHTML//Por que es label. fila.cells[0] = DNI (primera celda)
-            campoID.value      = fila.cells[1].innerHTML//Por que es input. fila.cells[1] = Nombre (segunda celda)
+            campoDNI.value      = fila.cells[0].innerHTML//Por que es label. fila.cells[0] = DNI (primera celda)
+            campoID.value       = fila.cells[1].innerHTML//Por que es input. fila.cells[1] = Nombre (segunda celda)
         }
     </script>
 
@@ -42,7 +42,7 @@
 
             // ← aquí agregamos la limpieza
             if (camptext === '' || camptext === null) {
-                document.getElementById('dniLabel').innerHTML = '0'
+                document.getElementById('dniID').value = '0'
             }
 
             fetch(url, {
