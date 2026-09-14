@@ -11,7 +11,6 @@ $N_C = isset($_POST['nombrePOST']) ? $conexion->real_escape_string($_POST['nombr
     }
 //............................................................................................
 
-
 $resultado = mysqli_query($conexion, $Seleccionar);
 $HTML = '';
 if($resultado){
