@@ -4,23 +4,18 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
-    <style>body{background: palegoldenrod;}</style>
 </head>
 <body>
-    <form method="POST" action="4_SeleccionarDelegacion.php">
+    <form method="POST" action="../../admin/query/4_SeleccionarDelegacion.php">
         <input type="text" name="nombrePOST" id="nombreID" placeholder="Nombre..." autofocus autocomplete="off"><br>
-        <label id="dniLabel">0</label>
+        <label id="dniLabel">0</label><br><br>
         <button type="submit">Ver Delegacion</button>
     </form>
-	
 
-	<table id="tabla" style="border: 0.2px solid darkred;">
+	<table id="tabla">
 		<thead>
             Lista de Pastores
-            <tr>
-                <th>DNI Pastor</th>
-                <th>Nombre Completo</th>
-            </tr>
+            <tr><th>DNI Pastor</th><th>Nombre Completo</th></tr>
         </thead>
 		<tbody id="cuerpo"><!--Aqui se insertara la lista de pastores con .JSON--></tbody>
 	</table>
