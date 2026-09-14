@@ -36,7 +36,7 @@ echo json_encode($HTML, JSON_UNESCAPED_UNICODE);
 
     <table id="tabla">
         <thead>
-            Datos.
+            <tr><th>Categoria</th><th>Extra</th><th>Telefono</th><th>Mesa</th></tr>
         </thead>
         <tbody id="cuerpo"><!--Aqui se insertara la lista de pastores con .JSON--></tbody>
     </table>
