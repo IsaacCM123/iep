@@ -4,15 +4,21 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
+    <style>
+        #dniID{
+            border: none;
+            font-size: 2em;
+        }
+    </style>
 </head>
 <body>
     <form method="POST" action="../../admin/query/4_SeleccionarDelegacion.php">
-        <input type="text" name="nombrePOST" id="nombreID" placeholder="Nombre..." autofocus autocomplete="off"><br>
+        <input type="text" name="nombrePOST" id="nombreID" placeholder="Nombre..." autofocus autocomplete="off"><br><br>
         <input type="text" name="dniPOST" id="dniID" placeholder="0" readonly><br><br>
         <button type="submit">Ver Delegacion</button>
     </form>
 
-	<table id="tabla">
+	<table id="tabla" align='center'>
 		<thead align='center'>
             Lista de Pastores
             <tr><th>DNI Pastor</th><th>Nombre Completo</th></tr>
