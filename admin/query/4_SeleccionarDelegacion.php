@@ -42,15 +42,17 @@ echo json_encode($HTML, JSON_UNESCAPED_UNICODE);
     </table>
 
     <script>
-        fetch('4_SeleccionarDelegacion.php')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('cuerpo').innerHTML = data;
-            })
-            .catch(error => {
-                document.getElementById('cuerpo').innerHTML = 
-                    '<tr><td colspan="4">Error al cargar los datos</td></tr>';
-            });
+        let formaData = new FormaData()
+        formaData.append()
+
+        fetch('4_SeleccionarDelegacion.php', {
+            method: 'POST',
+            body: formaData
+        }).then(response=>response.json())
+        .then(data=>{
+            document.getElementById('cuerpo').innerHTML = data
+        })
     </script>
+
 </body>
 </html>
