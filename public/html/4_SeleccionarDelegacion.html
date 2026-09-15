@@ -21,13 +21,20 @@
     </table>
 
     <script>
-        let formaData = new FormaData()
+        // 1. Obtener el dniPOST de la URL
+        const params = new URLSearchParams(window.location.search)
+        const dni = params.get('dniPOST')
+
+        // 2. Preparar y enviar la petición
+
+        const formaData = new FormData()
         formaData.append('dniPOST',dni)//dniPOST
 
         fetch('../../admin/query/5_xxx.php', {
             method: 'POST',
             body: formaData
-        }).then(response=>response.json())
+        })
+        .then(response=>response.json())
         .then(data=>{
             document.getElementById('cuerpo').innerHTML = data
         })
