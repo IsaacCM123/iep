@@ -22,9 +22,9 @@
 
     <script>
         let formaData = new FormaData()
-        formaData.append()
+        formaData.append('dniPOST')
 
-        fetch('5_xxx.php', {
+        fetch('../../admin/query/5_xxx.php', {
             method: 'POST',
             body: formaData
         }).then(response=>response.json())
