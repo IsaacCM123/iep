@@ -6,7 +6,7 @@
 	<title></title>
 </head>
 <body>
-    <form method="GET" action="4_SeleccionarDelegacion.html">
+    <form id="formBuscar"><!-- CAmbiado-->
         <input type="text" name="nombrePOST" id="nombreID" placeholder="Nombre..." autofocus autocomplete="off"><br><br>
         <input type="text" name="dniPOST" id="dniID" placeholder="0" readonly><br><br>
         <button type="submit">Ver Delegacion</button>
@@ -18,6 +18,31 @@
         </thead>
 		<tbody id="cuerpo"><!--Aqui se insertara la lista de pastores con .JSON--></tbody>
 	</table>
+
+
+    <script>
+        document.getElementById('formBuscar').addEventListener('submit', function(e){
+        e.preventDefault();
+
+        const dni = document.getElementById('dniID').value;
+        const nombre = document.getElementById('nombreID').value;
+
+        const formaData = new FormData();
+        formaData.append('dniPOST', dni);
+        formaData.append('nombrePOST', nombre);
+
+        fetch('../../admin/query/5_xxx.php', {
+            method: 'POST',
+            body: formaData
+            })
+            .then(response => response.json())
+            .then(data => {
+            sessionStorage.setItem('delegacionData', data); // guardamos el HTML ya armado
+            window.location.href = '4_SeleccionarDelegacion.html';
+            });
+        });
+    </script>
+    
 
 	<script>
         function obtenerDato(fila){

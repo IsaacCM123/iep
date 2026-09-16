@@ -14,22 +14,11 @@
     </table>
 
     <script>
-        // 1. Obtener el dniPOST de la URL
-        const params = new URLSearchParams(window.location.search)
-        const dni = params.get('dniPOST')
-
-        // 2. Preparar y enviar la petición
-        const formaData = new FormData()
-        formaData.append('dniPOST',dni)// El dniPOST (Clave) viajara hasta 5_xxx.php llevando el contenido (Valor) del dni
-
-        fetch('../../admin/query/5_xxx.php', {
-            method: 'POST',
-            body: formaData
-        })
-        .then(response=>response.json())
-        .then(data=>{
-            document.getElementById('cuerpo').innerHTML = data
-        })
+        const data = sessionStorage.getItem('delegacionData');
+        if (data) {
+            document.getElementById('cuerpo').innerHTML = data;
+            sessionStorage.removeItem('delegacionData'); // opcional, para limpiar
+        }
     </script>
 
 </body>
