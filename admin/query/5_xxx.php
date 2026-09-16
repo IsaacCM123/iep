@@ -1,8 +1,8 @@
 <?php
 require __DIR__ . '/../core/1_conexion.php';
 
-$dni = $_POST['dniPOST'];
-$nombre = $_POST['nombrePOST'];
+$dni = $_POST['dniPOSTParaPHP'];
+$nombre = $_POST['nombrePOSTParaPHP'];
 
 $Seleccionar = "SELECT categoria,extra,telefono,FK_idMesa from tbl_pastor where dniPastor = '$dni'";
 

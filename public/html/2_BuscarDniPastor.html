@@ -28,8 +28,8 @@
         const nombre = document.getElementById('nombreID').value;
 
         const formaData = new FormData();
-        formaData.append('dniPOST', dni);
-        formaData.append('nombrePOST', nombre);
+        formaData.append('dniPOSTParaPHP', dni);
+        formaData.append('nombrePOSTParaPHP', nombre);
 
         fetch('../../admin/query/5_xxx.php', {
             method: 'POST',
