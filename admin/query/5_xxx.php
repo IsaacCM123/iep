@@ -19,8 +19,7 @@ if($resultado){
         $HTML       .= "<td>".$fila['FK_idMesa']."</td>";
         $HTML       .= "</tr>";
     }
-} 
-else {echo "Error en la consulta: " . mysqli_error($conexion);}
+}
 mysqli_close($conexion);
 echo json_encode($HTML, JSON_UNESCAPED_UNICODE);
 ?>
