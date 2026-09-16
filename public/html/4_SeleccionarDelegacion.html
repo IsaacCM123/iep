@@ -6,17 +6,26 @@
     <title></title>
 </head>
 <body>
-    <h1>Delegacion Isaac Condori.</h1>
+    <h1>Delegacion...</h1>
 
-    <table>
-        <thead><!-- Cabeza--></thead>
-        <tbody id="cuerpo"><!--Aqui se insertara la lista de pastores con .JSON--></tbody>
-    </table>
+    <input type="text" id="dni" readonly>
+    <input type="text" id="nombre" readonly>
+    <input type="text" id="categoria" readonly>
+    <input type="text" id="extra" readonly>
+    <input type="text" id="telefono" readonly>
+    <input type="text" id="idMesa" readonly>
 
     <script>
-        const data = sessionStorage.getItem('delegacionData');
-        if (data) {
-            document.getElementById('cuerpo').innerHTML = data;
+        const cargarDatos = sessionStorage.getItem('delegacionData');
+        if (cargarDatos) {
+            const descargarDatosAqui = JSON.parse(cargarDatos)
+
+            document.getElementById('dni').value       = descargarDatosAqui.dni;
+            document.getElementById('nombre').value    = descargarDatosAqui.nombre;
+            document.getElementById('categoria').value = descargarDatosAqui.categoria;
+            document.getElementById('extra').value     = descargarDatosAqui.extra;
+            document.getElementById('telefono').value  = descargarDatosAqui.telefono;
+            document.getElementById('idMesa').value    = descargarDatosAqui.idMesa;
         }
     </script>
 

@@ -7,19 +7,19 @@ $nombre = $_POST['nombrePOSTParaPHP'];
 $Seleccionar = "SELECT categoria,extra,telefono,FK_idMesa from tbl_pastor where dniPastor = '$dni'";
 
 $resultado = mysqli_query($conexion, $Seleccionar);
-$HTML = '';
+$datos = [];
 if($resultado){
-    while ($fila = mysqli_fetch_assoc($resultado)) {
-        $HTML       .= "<tr>";
-        $HTML       .= "<td>".$dni."</td>";
-        $HTML       .= "<td>".$nombre."</td>";
-        $HTML       .= "<td>".$fila['categoria']."</td>";
-        $HTML       .= "<td>".$fila['extra']."</td>";
-        $HTML       .= "<td>".$fila['telefono']."</td>";
-        $HTML       .= "<td>".$fila['FK_idMesa']."</td>";
-        $HTML       .= "</tr>";
+    if($fila = mysqli_fetch_assoc($resultado)) {
+        $datos = [
+            'dni'        => $dni,
+            'nombre'     => $nombre,
+            'categoria'  => $fila['categoria'],
+            'extra'      => $fila['extra'],
+            'telefono'   => $fila['telefono'],
+            'idMesa'     => $fila['FK_idMesa']
+        ];
     }
 }
 mysqli_close($conexion);
-echo json_encode($HTML, JSON_UNESCAPED_UNICODE);
+echo json_encode($datos, JSON_UNESCAPED_UNICODE);
 ?>
