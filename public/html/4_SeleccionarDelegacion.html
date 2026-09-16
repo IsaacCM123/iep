@@ -11,25 +11,34 @@
     <input type="text" id="dni" readonly>
     <input type="text" id="nombre" readonly>
     <input type="text" id="categoria" readonly>
+    <input type="text" id="extra" readonly>
+    <input type="text" id="telefono" readonly>
     <input type="text" id="iglesia" readonly>
     <input type="text" id="ciudad" readonly>
-    <input type="text" id="esposa" readonly>
-    <input type="text" id="anfitrion" readonly>
+    <input type="text" id="pais" readonly>
     <input type="text" id="mesa" readonly>
+    <input type="text" id="anfitrion" readonly>
+    <input type="text" id="celular" readonly>
+    <input type="text" id="esposa" readonly>
+    
 
     <script>
-        const cargarDatos = sessionStorage.getItem('delegacionData');
+        const cargarDatos = sessionStorage.getItem('delegacionData')
         if (cargarDatos) {
             const descargarDatosAqui = JSON.parse(cargarDatos)
 
-            document.getElementById('dni').value        = descargarDatosAqui.dni;
-            document.getElementById('nombre').value     = descargarDatosAqui.nombre;
-            document.getElementById('categoria').value  = descargarDatosAqui.categoria;
-            document.getElementById('iglesia').value    = descargarDatosAqui.iglesia;
-            document.getElementById('ciudad').value     = descargarDatosAqui.ciudad;
-            document.getElementById('esposa').value     = descargarDatosAqui.esposa;
-            document.getElementById('anfitrion').value  = descargarDatosAqui.anfitrion;
-            document.getElementById('mesa').value       = descargarDatosAqui.mesa;
+            document.getElementById('dni').value        = descargarDatosAqui.dni
+            document.getElementById('nombre').value     = descargarDatosAqui.nombre
+            document.getElementById('categoria').value  = descargarDatosAqui.categoria
+            document.getElementById('extra').value      = descargarDatosAqui.extra
+            document.getElementById('telefono').value   = descargarDatosAqui.telefono
+            document.getElementById('iglesia').value    = descargarDatosAqui.iglesia
+            document.getElementById('ciudad').value     = descargarDatosAqui.ciudad
+            document.getElementById('pais').value       = descargarDatosAqui.pais
+            document.getElementById('mesa').value       = descargarDatosAqui.mesa
+            document.getElementById('anfitrion').value  = descargarDatosAqui.anfitrion
+            document.getElementById('celular').value    = descargarDatosAqui.celular
+            document.getElementById('esposa').value     = descargarDatosAqui.esposa
         }
     </script>
 
