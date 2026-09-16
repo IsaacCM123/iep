@@ -23,5 +23,4 @@ if($resultado){
 else {echo "Error en la consulta: " . mysqli_error($conexion);}
 mysqli_close($conexion);
 echo json_encode($HTML, JSON_UNESCAPED_UNICODE);
-//header('location:../../public/html/4_SeleccionarDelegacion.html');
 ?>

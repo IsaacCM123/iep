@@ -13,5 +13,12 @@
         <tbody id="cuerpo"><!--Aqui se insertara la lista de pastores con .JSON--></tbody>
     </table>
 
+    <script>
+        const data = sessionStorage.getItem('delegacionData');
+        if (data) {
+            document.getElementById('cuerpo').innerHTML = data;
+        }
+    </script>
+
 </body>
 </html>
