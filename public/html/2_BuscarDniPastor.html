@@ -37,7 +37,7 @@
             let cuerpoTBL   = document.getElementById('cuerpo')
             let url         = '../../admin/query/3_ListaSeleccionarPastor.php'
             let formaData   = new FormData()
-            formaData.append('nombrePOST', camptext)
+            formaData.append('nombrePOST', camptext)// A 3_ListaSeleccionarPastor.php mandamos name='nombrePOST' con el valor campTetx
 
             // ← aquí agregamos la limpieza
             if (camptext === '' || camptext === null) {

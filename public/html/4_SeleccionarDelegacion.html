@@ -6,17 +6,10 @@
     <title></title>
 </head>
 <body>
-    <h1>Este es el formulario 4_SeleccionarDelegacion.php</h1>
+    <h1>Delegacion.</h1>
 
     <table>
-        <thead>
-            <tr>
-                <th>Categoria</th>
-                <th>Extra</th>
-                <th>Telefono</th>
-                <th>Mesa</th>
-            </tr>
-        </thead>
+        <thead><!-- Cabeza--></thead>
         <tbody id="cuerpo"><!--Aqui se insertara la lista de pastores con .JSON--></tbody>
     </table>
 
@@ -26,9 +19,8 @@
         const dni = params.get('dniPOST')
 
         // 2. Preparar y enviar la petición
-
         const formaData = new FormData()
-        formaData.append('dniPOST',dni)//dniPOST
+        formaData.append('dniPOST',dni)// El dniPOST (Clave) viajara hasta 5_xxx.php llevando el contenido (Valor) del dni
 
         fetch('../../admin/query/5_xxx.php', {
             method: 'POST',
