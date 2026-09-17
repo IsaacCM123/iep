@@ -30,27 +30,45 @@
     </script>
 
     <script>// Cargamos los registros de todos los pastores en la tabla
-        getData()
-        document.getElementById('nombreID').addEventListener('keyup', getData)
+
+        let temporizador
+        let controladorActual
+
+        getData()// Para RAILWAY........
+        document.getElementById('nombreID').addEventListener('keyup', function(){// Para RAILWAY........
+            clearTimeout(temporizador)// Para RAILWAY........
+            temporizador = setTimeout(getData, 300)//Espera 300ms desde la ultima tecla
+        })// Para RAILWAY........
+
         function getData(){
             let camptext    = document.getElementById('nombreID').value
             let cuerpoTBL   = document.getElementById('cuerpo')
             let url         = '../../admin/query/3_BuscarRegistroPastor_PHP.php'
             let formaData   = new FormData()
-            formaData.append('nombrePOST', camptext)// A 3_ListaSeleccionarPastor.php mandamos name='nombrePOST' con el valor campTetx
+            formaData.append('nombrePOST', camptext)
 
             // ← aquí agregamos la limpieza
             if (camptext === '' || camptext === null) {
                 document.getElementById('dniID').value = '0'
             }
 
+            // Si había una petición anterior en curso, la cancelamos
+            if (controladorActual) {
+                controladorActual.abort()
+            }
+            controladorActual = new AbortController()
+
             fetch(url, {
                 method: 'POST',
-                body: formaData
+                body: formaData,
+                signal: controladorActual.signal//Para  RAILWAY.........
             }).then(response => response.json())
             .then(data => {
                 cuerpoTBL.innerHTML = data
             })
+            .catch(err=>{//Para RAILWAY........
+                if (err.name !== 'AbortError') {console.error(err)}//Para RAILWAY........
+            })//Para RAILWAY........
         }
     </script>
 
