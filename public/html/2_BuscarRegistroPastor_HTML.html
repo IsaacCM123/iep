@@ -19,32 +19,7 @@
 		<tbody id="cuerpo"><!--Aqui se insertara la lista de pastores con .JSON--></tbody>
 	</table>
 
-
-    <script>
-        document.getElementById('formBuscar').addEventListener('submit', function(e){
-        e.preventDefault()
-
-        const dni = document.getElementById('dniID').value
-        const nombre = document.getElementById('nombreID').value
-
-        const formaData = new FormData()
-        formaData.append('dniPOSTParaPHP', dni)
-        formaData.append('nombrePOSTParaPHP', nombre)
-
-        fetch('../../admin/query/5_xxx.php', {
-            method: 'POST',
-            body: formaData
-            })
-            .then(response => response.json())
-            .then(data => {
-            sessionStorage.setItem('delegacionData', JSON.stringify(data))
-            window.location.href = '4_SeleccionarDelegacion.html'
-            })
-        });
-    </script>
-
-
-	<script>
+	<script>//Hacemos click en una fila para seleccionar el dniPastor y nombreCompleto de pastror
         function obtenerDato(fila){
             let campoID         = document.getElementById('nombreID')
             let campoDNI        = document.getElementById('dniID')
@@ -54,13 +29,13 @@
         }
     </script>
 
-    <script>
+    <script>// Cargamos los registros de todos los pastrores en la tabla
         getData()
         document.getElementById('nombreID').addEventListener('keyup', getData)
         function getData(){
             let camptext    = document.getElementById('nombreID').value
             let cuerpoTBL   = document.getElementById('cuerpo')
-            let url         = '../../admin/query/3_ListaSeleccionarPastor.php'
+            let url         = '../../admin/query/3_BuscarRegistroPastor_PHP.php'
             let formaData   = new FormData()
             formaData.append('nombrePOST', camptext)// A 3_ListaSeleccionarPastor.php mandamos name='nombrePOST' con el valor campTetx
 
@@ -77,6 +52,29 @@
                 cuerpoTBL.innerHTML = data
             })
         }
+    </script>
+
+    <script>//Seleccionamos los datos de Hijo, Esposa, Delegado, Iglesia, Pastor, para asignarles: Hospedaje, Mesa por su dniPastor.
+        document.getElementById('formBuscar').addEventListener('submit', function(e){
+        e.preventDefault()
+
+        const dni = document.getElementById('dniID').value
+        const nombre = document.getElementById('nombreID').value
+
+        const formaData = new FormData()
+        formaData.append('dniPOSTParaPHP', dni)
+        formaData.append('nombrePOSTParaPHP', nombre)
+
+        fetch('../../admin/query/4_SeleccionarDelegacion_PHP.php', {
+            method: 'POST',
+            body: formaData
+            })
+            .then(response => response.json())
+            .then(data => {
+            sessionStorage.setItem('delegacionData', JSON.stringify(data))
+            window.location.href = '5_SeleccionarDelegacion_HTML.html'
+            })
+        });
     </script>
 </body>
 </html>
