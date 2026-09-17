@@ -9,7 +9,7 @@
     <form id="formBuscar">
         <input type="text" name="nombrePOST" id="nombreID" placeholder="Nombre..." autofocus autocomplete="off"><br><br>
         <input type="text" name="dniPOST" id="dniID" placeholder="0" readonly><br><br>
-        <button type="submit">Ver Delegacion Original</button>
+        <button type="submit">Ver Delegacion</button>
     </form>
 
 	<table>
@@ -29,7 +29,7 @@
         }
     </script>
 
-    <script>// Cargamos los registros de todos los pastrores en la tabla
+    <script>// Cargamos los registros de todos los pastores en la tabla
         getData()
         document.getElementById('nombreID').addEventListener('keyup', getData)
         function getData(){

@@ -25,7 +25,26 @@ $Seleccionar = "SELECT      p.categoria,
                 LEFT JOIN   tbl_mesa m        ON m.idMesa           = p.FK_idMesa
                 WHERE       p.dniPastor = '$dni'";
 
-$resultado = mysqli_query($conexion, $Seleccionar);
+$SeleDelegados = "SELECT    nombreDelegado,
+                            cedulaIdentidad,
+                            FK_dniPastor,
+                            FK_idMesa
+                FROM        tbl_delegado
+                WHERE       FK_dniPastor = '$dni'";
+
+$SeleHijos =    "SELECT     nombreHijo,
+                            FK_dniPastor,
+                            FK_idMesa
+                FROM        tbl_hijo
+                WHERE       FK_dniPastor = '$dni'";
+
+$resultado = mysqli_query($conexion,$Seleccionar);
+
+$ResulDele = mysqli_query($conexion,$SeleDelegados);
+
+$ResulHijo = mysqli_query($conexion,$SeleHijos);
+
+
 $datos = [];
 if($resultado){
     if($fila = mysqli_fetch_assoc($resultado)) {
@@ -40,11 +59,38 @@ if($resultado){
             'pais'          => $fila['pais'],
             'mesa'          => $fila['nombreMesa'],
             'anfitrion'     => $fila['nombrePersona'],
-            'celular'     => $fila['celular'],
+            'celular'       => $fila['celular'],
             'esposa'        => $fila['nombreEsposa']
         ];
     }
 }
+
+$delegados = [];
+if ($ResulDele){
+    while ($fila = mysqli_fetch_assoc($ResulDele)) {
+        $delegados[] = [
+            'nombre'     => $fila['nombreDelegado'],
+            'cedula'     => $fila['cedulaIdentidad'],
+            'dniPastor'  => $fila['FK_dniPastor'],
+            'mesa'       => $fila['FK_idMesa']
+        ];
+    }
+}
+
+$hijos = [];
+if ($ResulHijo){
+    while ($fila = mysqli_fetch_assoc($ResulHijo)) {
+        $hijos[] = [
+            'nombre'    => $fila['nombreHijo'],
+            'dniPastor' => $fila['FK_dniPastor'],
+            'mesa'      => $fila['FK_idMesa']
+        ];
+    }
+}
+
+$datos['delegados'] = $delegados;
+$datos['hijos']     = $hijos;
+
 mysqli_close($conexion);
 echo json_encode($datos, JSON_UNESCAPED_UNICODE);
 ?>
