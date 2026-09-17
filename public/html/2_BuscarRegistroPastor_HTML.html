@@ -19,7 +19,7 @@
 		<tbody id="cuerpo"><!--Aqui se insertara la lista de pastores con .JSON--></tbody>
 	</table>
 
-	<script>//Hacemos click en una fila para seleccionar el dniPastor y nombreCompleto de pastror
+	<script>
         function obtenerDato(fila){
             let campoID         = document.getElementById('nombreID')
             let campoDNI        = document.getElementById('dniID')
@@ -30,16 +30,8 @@
     </script>
 
     <script>// Cargamos los registros de todos los pastores en la tabla
-
-        let temporizador
-        let controladorActual
-
-        getData()// Para RAILWAY........
-        document.getElementById('nombreID').addEventListener('keyup', function(){// Para RAILWAY........
-            clearTimeout(temporizador)// Para RAILWAY........
-            temporizador = setTimeout(getData, 300)//Espera 300ms desde la ultima tecla
-        })// Para RAILWAY........
-
+        getData()
+        document.getElementById('nombreID').addEventListener('keyup', getData)
         function getData(){
             let camptext    = document.getElementById('nombreID').value
             let cuerpoTBL   = document.getElementById('cuerpo')
@@ -52,27 +44,17 @@
                 document.getElementById('dniID').value = '0'
             }
 
-            // Si había una petición anterior en curso, la cancelamos
-            if (controladorActual) {//Para RAILWAY...
-                controladorActual.abort()//Para RAILWAY...
-            }//Para RAILWAY...
-            controladorActual = new AbortController()//Para RAILWAY...
-
             fetch(url, {
                 method: 'POST',
-                body: formaData,
-                signal: controladorActual.signal//Para  RAILWAY.........
+                body: formaData
             }).then(response => response.json())
             .then(data => {
                 cuerpoTBL.innerHTML = data
             })
-            .catch(err=>{//Para RAILWAY........
-                if (err.name !== 'AbortError') {console.error(err)}//Para RAILWAY........
-            })//Para RAILWAY........
         }
     </script>
 
-    <script>//Seleccionamos los datos de Hijo, Esposa, Delegado, Iglesia, Pastor, para asignarles: Hospedaje, Mesa por su dniPastor.
+    <script>
         document.getElementById('formBuscar').addEventListener('submit', function(e){
         e.preventDefault()
 
