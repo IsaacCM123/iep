@@ -53,10 +53,10 @@
             }
 
             // Si había una petición anterior en curso, la cancelamos
-            if (controladorActual) {
-                controladorActual.abort()
-            }
-            controladorActual = new AbortController()
+            if (controladorActual) {//Para RAILWAY...
+                controladorActual.abort()//Para RAILWAY...
+            }//Para RAILWAY...
+            controladorActual = new AbortController()//Para RAILWAY...
 
             fetch(url, {
                 method: 'POST',
