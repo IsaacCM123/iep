@@ -6,35 +6,47 @@
     <title></title>
 </head>
 <body>
-    <h1>Delegacion ICM...</h1>
+    <h1>Delegacion</h1>
 
-    <input type="text" id="dni" readonly>
-    <input type="text" id="nombre" readonly>
-    <input type="text" id="categoria" readonly>
-    <input type="text" id="extra" readonly>
-    <input type="text" id="telefono" readonly>
-    <input type="text" id="iglesia" readonly>
-    <input type="text" id="ciudad" readonly>
-    <input type="text" id="pais" readonly>
-    <input type="text" id="mesa" readonly>
-    <input type="text" id="anfitrion" readonly>
-    <input type="text" id="celular" readonly>
-    <input type="text" id="esposa" readonly>
+    <fieldset>
+        <legend>Datos Pastor</legend>
+        <input type="text" id="dni" readonly>
+        <input type="text" id="nombre" readonly>
+        <input type="text" id="categoria" readonly>
+        <input type="text" id="extra" readonly>
+        <input type="text" id="telefono" readonly>
+        <input type="text" id="iglesia" readonly>
+        <input type="text" id="ciudad" readonly>
+        <input type="text" id="pais" readonly>
+        <input type="text" id="mesa" readonly>
+        <input type="text" id="anfitrion" readonly>
+        <input type="text" id="celular" readonly>
+    </fieldset>
 
-    <table><!--delegado!-->
-        <thead align='center'>
-            <tr><th>Nombre Delegado</th><th>Cedula Identidad</th><th>DNI Pastor</th><th>Mesa</th></tr>
-        </thead>
-        <tbody id="cuerpoDel"><!--Aqui se insertara la lista de pastores con .JSON--></tbody>
-    </table>
+    <fieldset>
+        <legend>Datos Delegado</legend>
+        <table><!--delegado!-->
+            <thead align='center'>
+                <tr><th>Nombre Delegado</th><th>Cedula Identidad</th><th>DNI Pastor</th><th>Mesa</th></tr>
+            </thead>
+            <tbody id="cuerpoDel"><!--Aqui se insertara la lista de pastores con .JSON--></tbody>
+        </table>
+    </fieldset>
 
-    <table><!--hijos-->
-        <thead align='center'>
-            <tr><th>nombre Hijo</th><th>DNI Pastor</th><th>Mesa</th></tr>
-        </thead>
-        <tbody id="cuerpoHijo"><!--Aqui se insertara la lista de hijos con JSON--></tbody>
-    </table>
-    
+    <fieldset>
+        <legend>Datos Esposa</legend>
+        <input type="text" id="esposa" readonly>
+    </fieldset>
+
+    <fieldset>
+        <legend>Datos Hijo</legend>
+        <table><!--hijos-->
+            <thead align='center'>
+                <tr><th>nombre Hijo</th><th>DNI Pastor</th><th>Mesa</th></tr>
+            </thead>
+            <tbody id="cuerpoHijo"><!--Aqui se insertara la lista de hijos con JSON--></tbody>
+        </table>
+    </fieldset>
 
     <script>
         const cargarDatos = sessionStorage.getItem('delegacionData')
