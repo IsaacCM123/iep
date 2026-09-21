@@ -27,13 +27,11 @@ $Seleccionar = "SELECT      p.categoria,
 
 $SeleDelegados = "SELECT    nombreDelegado,
                             cedulaIdentidad,
-                            FK_dniPastor,
                             FK_idMesa
                 FROM        tbl_delegado
                 WHERE       FK_dniPastor = '$dni'";
 
 $SeleHijos =    "SELECT     nombreHijo,
-                            FK_dniPastor,
                             FK_idMesa
                 FROM        tbl_hijo
                 WHERE       FK_dniPastor = '$dni'";
@@ -71,7 +69,6 @@ if ($ResulDele){
         $delegados[] = [
             'nombre'     => $fila['nombreDelegado'],
             'cedula'     => $fila['cedulaIdentidad'],
-            'dniPastor'  => $fila['FK_dniPastor'],
             'mesa'       => $fila['FK_idMesa']
         ];
     }
@@ -82,14 +79,13 @@ if ($ResulHijo){
     while ($fila = mysqli_fetch_assoc($ResulHijo)) {
         $hijos[] = [
             'nombre'    => $fila['nombreHijo'],
-            'dniPastor' => $fila['FK_dniPastor'],
             'mesa'      => $fila['FK_idMesa']
         ];
     }
 }
 
-$datos['delegados'] = $delegados;
-$datos['hijos']     = $hijos;
+$datos['delegadosArray'] = $delegados;
+$datos['hijosArray']     = $hijos;
 
 mysqli_close($conexion);
 echo json_encode($datos, JSON_UNESCAPED_UNICODE);

@@ -10,26 +10,26 @@
 
     <fieldset>
         <legend>Datos Pastor</legend>
-        <input type="text" id="dni" readonly>
-        <input type="text" id="nombre" readonly>
-        <input type="text" id="categoria" readonly>
-        <input type="text" id="extra" readonly>
-        <input type="text" id="telefono" readonly>
-        <input type="text" id="iglesia" readonly>
-        <input type="text" id="ciudad" readonly>
-        <input type="text" id="pais" readonly>
-        <input type="text" id="mesa" readonly>
-        <input type="text" id="anfitrion" readonly>
-        <input type="text" id="celular" readonly>
+        <input type="text" id="dni" readonly><br>
+        <input type="text" id="nombre" readonly><br>
+        <input type="text" id="categoria" readonly><br>
+        <input type="text" id="extra" readonly><br>
+        <input type="text" id="telefono" readonly><br>
+        <input type="text" id="iglesia" readonly><br>
+        <input type="text" id="ciudad" readonly><br>
+        <input type="text" id="pais" readonly><br>
+        <input type="text" id="mesa" readonly><br>
+        <input type="text" id="anfitrion" readonly><br>
+        <input type="text" id="celular" readonly><br>
     </fieldset>
 
     <fieldset>
         <legend>Datos Delegado</legend>
-        <table><!--delegado!-->
+        <table><!--delegados!-->
             <thead align='center'>
-                <tr><th>Nombre Delegado</th><th>Cedula Identidad</th><th>DNI Pastor</th><th>Mesa</th></tr>
+                <tr><th>Nombre Delegado</th><th>Cedula Identidad</th><th>Mesa</th></tr>
             </thead>
-            <tbody id="cuerpoDel"><!--Aqui se insertara la lista de pastores con .JSON--></tbody>
+            <tbody id="cuerpoDel"><!--Aqui se insertara la lista de delegados con .JSON--></tbody>
         </table>
     </fieldset>
 
@@ -42,7 +42,7 @@
         <legend>Datos Hijo</legend>
         <table><!--hijos-->
             <thead align='center'>
-                <tr><th>nombre Hijo</th><th>DNI Pastor</th><th>Mesa</th></tr>
+                <tr><th>nombre Hijo</th><th>Mesa</th></tr>
             </thead>
             <tbody id="cuerpoHijo"><!--Aqui se insertara la lista de hijos con JSON--></tbody>
         </table>
@@ -68,11 +68,10 @@
 
             const cuerpoDel = document.getElementById('cuerpoDel')
             let filasDelegados = ''
-            descargarDatosAqui.delegados.forEach(d => {
+            descargarDatosAqui.delegadosArray.forEach(d => {
                 filasDelegados += `<tr>
                     <td>${d.nombre}</td>
                     <td>${d.cedula}</td>
-                    <td>${d.dniPastor}</td>
                     <td>${d.mesa}</td>
                 </tr>`
             })
@@ -80,10 +79,9 @@
 
             const cuerpoHijo = document.getElementById('cuerpoHijo')
             let filasHijos = ''
-            descargarDatosAqui.hijos.forEach(h => {
+            descargarDatosAqui.hijosArray.forEach(h => {
                 filasHijos += `<tr>
                     <td>${h.nombre}</td>
-                    <td>${h.dniPastor}</td>
                     <td>${h.mesa}</td>
                 </tr>`
             })
