@@ -4,7 +4,7 @@ require __DIR__ . '/../core/1_conexion.php';
 $Seleccionar = "SELECT dniPastor,nombreCompleto FROM tbl_pastor";
 
 //keyup para buscar nombre desde campo de texto nombrePOST ...................................
-$N_C = isset($_POST['nombrePOST']) ? $conexion->real_escape_string($_POST['nombrePOST']) : null;
+$N_C = isset($_POST['nombrePOSTEnviarPHP']) ? $conexion->real_escape_string($_POST['nombrePOSTEnviarPHP']) : null;
     if ($N_C != null)
     {
        $Seleccionar = "SELECT dniPastor,nombreCompleto FROM tbl_pastor WHERE nombreCompleto LIKE '%".$N_C."%'";

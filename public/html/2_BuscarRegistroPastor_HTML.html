@@ -9,12 +9,12 @@
     <form id="formBuscar">
         <input type="text" name="nombrePOST" id="nombreID" placeholder="Nombre..." autofocus autocomplete="off"><br><br>
         <input type="text" name="dniPOST" id="dniID" placeholder="0" readonly><br><br>
-        <button type="submit">Ver Delegacion</button>
+        <button type="submit">Delegacion</button>
     </form>
 
 	<table>
 		<thead align='center'>
-            <tr><th>DNI Pastor</th><th>Nombre Completo</th></tr>
+            <tr><th>Dni</th><th>Nombre Completo</th></tr>
         </thead>
 		<tbody id="cuerpo"><!--Aqui se insertara la lista de pastores con .JSON--></tbody>
 	</table>
@@ -37,7 +37,7 @@
             let cuerpoTBL   = document.getElementById('cuerpo')
             let url         = '../../admin/query/3_BuscarRegistroPastor_PHP.php'
             let formaData   = new FormData()
-            formaData.append('nombrePOST', camptext)
+            formaData.append('nombrePOSTEnviarPHP', camptext)
 
             // ← aquí agregamos la limpieza
             if (camptext === '' || camptext === null) {
