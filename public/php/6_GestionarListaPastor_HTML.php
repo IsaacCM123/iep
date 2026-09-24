@@ -9,8 +9,6 @@
 <style>
   body {
 	    font-family: system-ui, sans-serif;
-	    display: flex;
-	    justify-content: center;
 	    padding: 60px;
 	    background: #f4f5f7;
 	  }
@@ -77,16 +75,55 @@
 
 
 <body>
-	<!--Modal para agregar nuevo pastor ....................INICIO-->
+	
 	<button id="openBtn">Abrir modal</button>
 
-	<dialog id="miModal">
+
+	<!--Modal para agregar nuevo pastor ....................INICIO-->
+	<dialog id="miModal" closedby="any">
 	  <div class="dialog-content">
-	    <h2>Confirmar acción</h2>
+	    <h2>Registro Pastor</h2>
+	    <input type="text" name="nombre" placeholder="Dni Pastor..." required><br>
+	    <input type="text" name="nombre" placeholder="Nombre Completo..." required><br>
+
+
+	    <select required>
+	    	<option value="" disabled selected>Categoria</option>
+	    	<option value="PRESBITERO">PRESBITERO</option>
+	    	<option value="DIACONO">DIACONO</option>
+	    	<option value="PROBANDO">PROBANDO</option>
+	    	<option value="HONORARIO">HONORARIO</option>
+	    </select><br>
+
+
+	    <input placeholder="Extra..." list="Extra">
+	    <datalist id="Extra">
+	    	<option value="JEFE DE ZONA">Requisito Opcional 1</option>
+	    	<option value="SECRETARIO">Requisito Opcional 2</option>
+	    	<option value="TESORERO">Requisito Opcional 3</option>
+	    	<option value="PRESIDENTE">Requisito Opcional 4</option>
+	    	<option value="VOCAL">Requisito Opcional 5</option>
+	    </datalist><br>
+
+
+	    <input type="text" placeholder="Telefono..." name=""><br>
+
+	    
+	    <input placeholder="Mesa..." list="Mesa">
+	    <datalist id="Mesa">
+	    	<option value="Mesa-001">Moises</option>
+	    	<option value="Mesa-002">Pablo</option>
+	    	<option value="Mesa-003">Abraham</option>
+	    	<option value="Mesa-004">Mateo</option>
+	    	<option value="Mesa-005">Jeremias</option>
+	    </datalist>
+
+
+
 	    <p>¿Estás seguro de que deseas continuar? Esta acción no se puede deshacer.</p>
 	    <div class="dialog-actions">
 	      <button class="btn-secondary" id="cancelBtn">Cancelar</button>
-	      <button class="btn-danger" id="confirmBtn">Confirmar</button>
+	      <button class="btn-danger" id="confirmBtn">Confirmar ICM</button>
 	    </div>
 	  </div>
 	</dialog>
