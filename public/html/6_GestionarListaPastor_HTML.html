@@ -138,16 +138,20 @@
 
         <p>¿Estás seguro de que deseas continuar? Esta acción no se puede deshacer.</p>
         <div class="dialog-actions">
-          <button class="btn-secondary" id="cancelBtn">Cancelar</button>
-          <button class="btn-danger" id="confirmBtn">Confirmar</button>
+          <input type="reset" class="btn-secondary" id="cancelBtn">Cancelar</input>
+          <input type="submit" class="btn-danger" id="confirmBtn">Confirmar</input>
+          <!--<input type="hidden" value="<?=$Lista['ID_Unico']?>" name="ID_P">
+          <input type="hidden" value="<?=$Lista['N_C']?>" name="N_P">
+          <input type="submit" id="A_M" value="ASIGNAR MESA">-->
         </div>
       </div>
     </dialog>
     <!--Modal para agregar nuevo pastor ....................FINAL-->
 
-    <button id="openBtn">Registrar</button><!--Abrir el Modal..!-->
+    <button id="openBtn">Registrar</button><br><!--Abrir el Modal..!-->
 
     <input type="text" name="nombrePOST" id="nombreID" placeholder="Nombre...">
+    
     <table>
         <thead>
             <tr><th>Nombre Completo</th></tr>
