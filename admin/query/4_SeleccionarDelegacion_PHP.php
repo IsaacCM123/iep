@@ -42,7 +42,6 @@ $ResulDele = mysqli_query($conexion,$SeleDelegados);
 
 $ResulHijo = mysqli_query($conexion,$SeleHijos);
 
-
 $datos = [];
 if($resultado){
     if($fila = mysqli_fetch_assoc($resultado)) {

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+</head>
+
+<style>
+  body {
+        font-family: system-ui, sans-serif;
+        padding: 60px;
+        background: #f4f5f7;
+      }
+
+      button {
+        padding: 10px 18px;
+        background: #2563eb;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 15px;
+        cursor: pointer;
+      }
+      button:hover { background: #1d4ed8; }
+
+      dialog {
+        border: none;
+        border-radius: 12px;
+        padding: 0;
+        width: 90%;
+        max-width: 420px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+      }
+
+      dialog::backdrop {
+        background: rgba(0,0,0,0.5);
+        backdrop-filter: blur(2px);
+      }
+
+      .dialog-content {
+        padding: 24px;
+      }
+
+      .dialog-content h2 {
+        margin: 0 0 8px;
+        font-size: 19px;
+        color: #111827;
+      }
+
+      .dialog-content p {
+        margin: 0 0 20px;
+        color: #4b5563;
+        font-size: 14px;
+      }
+
+      .dialog-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+      }
+
+      .btn-secondary {
+        background: #e5e7eb;
+        color: #111827;
+      }
+      .btn-secondary:hover { background: #d1d5db; }
+
+      .btn-danger {
+        background: #dc2626;
+      }
+      .btn-danger:hover { background: #b91c1c; }
+</style>
+
+<body>
+    <!--Modal para agregar nuevo pastor ....................INICIO-->
+    <dialog id="miModal" closedby="any">
+      <div class="dialog-content">
+        <h2>Registrar Pastor</h2>
+        <input type="text" name="nombre" placeholder="DNI..." required><br>
+        <input type="text" name="nombre" placeholder="NOMBRE COMPLETO..." required><br>
+
+        <select required>
+            <option value="" disabled selected>CATEGORIA</option>
+            <option value="PRESBITERO">PRESBÍTERO</option>
+            <option value="DIACONO">DIÁCONO</option>
+            <option value="PROBANDO">PROBANDO</option>
+            <option value="HONORARIO">HONORARIO</option>
+            <option value="HONORARIO">AYUDANTE</option>
+        </select><br>
+
+        <input placeholder="EXTRA..." list="ExtraID">
+        <datalist id="ExtraID">
+          <option value="ENCARGADO DE OBRA">Requisito Opcional.</option>
+          <option value="SUPERINTENDENTE">Requisito Opcional.</option>
+          <option value="JEFE DE ZONA">Requisito Opcional.</option>
+          <option value="PRESIDENTE">Requisito Opcional.</option>
+          <option value="ANFITRION">Requisito Opcional.</option>
+          <option value="TESORERO">Requisito Opcional.</option>
+          <option value="VOCAL">Requisito Opcional.</option>
+        </datalist><br>
+
+        <input type="text" placeholder="TELEFONO..." name="" required><br>
+        
+        <input placeholder="MESA..." list="Mesa">
+        <datalist id="Mesa">
+            <option value="Mesa-001">MOISÉS</option>
+            <option value="Mesa-002">PABLO</option>
+            <option value="Mesa-003">ABRAHAM</option>
+            <option value="Mesa-004">MATEO</option>
+            <option value="Mesa-005">DAVID</option>
+            <option value="Mesa-006">PEDRO</option>
+            <option value="Mesa-007">SALOMÓN</option>
+            <option value="Mesa-008">LUCAS</option>
+            <option value="Mesa-009">JOSÉ</option>
+            <option value="Mesa-010">JUAN</option>
+            <option value="Mesa-011">SAMUEL</option>
+            <option value="Mesa-012">SANTIAGO</option>
+            <option value="Mesa-013">JACOB</option>
+            <option value="Mesa-014">MARCOS</option>
+            <option value="Mesa-015">JOSUÉ</option>
+            <option value="Mesa-016">ESTEBAN</option>
+            <option value="Mesa-017">ELIAS</option>
+            <option value="Mesa-018">NOÉ</option>
+            <option value="Mesa-019">ISAIAS</option>
+            <option value="Mesa-020">JEREMIAS</option>
+            <option value="Mesa-021">JOB</option>
+            <option value="Mesa-022">DANIEL</option>
+            <option value="Mesa-023">EZEQUIEL</option>
+            <option value="Mesa-024">HAGEO</option>
+            <option value="Mesa-025">ELISEO</option>
+            <option value="Mesa-026">ZACARIAS</option>
+            <option value="Mesa-027">AARÓN</option>
+            <option value="Mesa-028">ANDRÉS</option>
+            <option value="Mesa-029">NAHUM</option>
+            <option value="Mesa-030">JESÚS</option>
+        </datalist>
+
+        <p>¿Estás seguro de que deseas continuar? Esta acción no se puede deshacer.</p>
+        <div class="dialog-actions">
+          <button class="btn-secondary" id="cancelBtn">Cancelar</button>
+          <button class="btn-danger" id="confirmBtn">Confirmar</button>
+        </div>
+      </div>
+    </dialog>
+    <!--Modal para agregar nuevo pastor ....................FINAL-->
+
+    <button id="openBtn">Registrar</button><!--Abrir el Modal..!-->
+
+    <input type="text" name="nombrePOST" id="nombreID" placeholder="Nombre...">
+    <table>
+        <thead>
+            <tr><th>Nombre Completo</th></tr>
+        </thead>
+        <tbody id="cuerpoTBL"></tbody>
+    </table>
+
+    <script>
+        const datoFormateado = new FormData()
+        datoFormateado.append('ClaveNombrePost_QueryPHP',document.getElementById('nombreID').value)
+
+        fetch('../../admin/query/7_GestionarListaPastor_PHP.php',{method:'POST',body:datoFormateado})
+        .then(response=>response.json())
+        .then(valoresDePHP=>{
+            document.getElementById('cuerpoTBL').innerHTML = valoresDePHP
+        })
+    </script>
+
+    <script>
+      const modal = document.getElementById('miModal');
+      const openBtn = document.getElementById('openBtn');
+      const cancelBtn = document.getElementById('cancelBtn');
+      const confirmBtn = document.getElementById('confirmBtn');
+
+      openBtn.addEventListener('click', () => {
+        modal.showModal(); // abre como modal (bloquea interacción con el fondo)
+      });
+
+      cancelBtn.addEventListener('click', () => {
+        modal.close();
+      });
+
+      confirmBtn.addEventListener('click', () => {
+        console.log('Acción confirmada');
+        modal.close();
+      });
+    </script>
+</body>
+</html>
