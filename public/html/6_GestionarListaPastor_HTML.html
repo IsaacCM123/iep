@@ -70,6 +70,9 @@
         background: #dc2626;
       }
       .btn-danger:hover { background: #b91c1c; }
+      #W{
+        border: 5px solid red;
+      }
 </style>
 
 <body>
@@ -163,6 +166,7 @@
         <tbody id="cuerpoTBL"></tbody>
     </table>
 
+    <!--Cargamos el registro de todos los pastores........................INICIO-->
     <script>
         const datoFormateado = new FormData()
         datoFormateado.append('ClaveNombrePost_QueryPHP',document.getElementById('nombreID').value)
@@ -173,6 +177,7 @@
             document.getElementById('cuerpoTBL').innerHTML = valoresDePHP
         })
     </script>
+    <!--Cargamos el registro de todos los pastores........................FINAL-->
 
     <script>
       const modal = document.getElementById('miModal')
@@ -193,5 +198,7 @@
         //modal.close();
       })
     </script>
+
+    <script type="module"src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.esm.js"></script>
 </body>
 </html>
