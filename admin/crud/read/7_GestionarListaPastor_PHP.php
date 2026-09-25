@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../core/1_conexion.php';
+require __DIR__ . '/../../core/1_conexion.php';
 $EjecutarConsulta = 'SELECT nombreCompleto FROM tbl_pastor';
 $CargarValoresDeLaconsulta = mysqli_query($conexion,$EjecutarConsulta);
 $HTML='';

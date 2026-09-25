@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../core/1_conexion.php';
+require __DIR__ . '/../../core/1_conexion.php';
 
 $Seleccionar = "SELECT dniPastor,nombreCompleto FROM tbl_pastor";
 

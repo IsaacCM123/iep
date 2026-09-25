@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../core/1_conexion.php';
+require __DIR__ . '/../../core/1_conexion.php';
 
 $dni = $_POST['dniPOSTParaPHP'];
 $nombre = $_POST['nombrePOSTParaPHP'];

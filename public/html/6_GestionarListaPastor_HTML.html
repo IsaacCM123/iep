@@ -77,7 +77,7 @@
     <dialog id="miModal" closedby="any">
         <div class="dialog-content">
             <h2>Registrar Pastor</h2>
-            <form method="POST" action="../../admin/query/8_RegistrarNuevoPastor_PHP.php">
+            <form method="POST" action="../../admin/crud/create/8_RegistrarNuevoPastor_PHP.php">
                 <input type="text"name="DNI_POST"placeholder="DNI.."autocomplete="off"><br>
                 <label>Ejm: 8024699-CBBA</label><br><br>
                 <input type="text"name="NOMBRE_POST"placeholder="NOMBRE.."autocomplete="off"><br>
@@ -167,7 +167,7 @@
         const datoFormateado = new FormData()
         datoFormateado.append('ClaveNombrePost_QueryPHP',document.getElementById('nombreID').value)
 
-        fetch('../../admin/query/7_GestionarListaPastor_PHP.php',{method:'POST',body:datoFormateado})
+        fetch('../../admin/crud/read/7_GestionarListaPastor_PHP.php',{method:'POST',body:datoFormateado})
         .then(response=>response.json())
         .then(valoresDePHP=>{
             document.getElementById('cuerpoTBL').innerHTML = valoresDePHP
@@ -175,23 +175,23 @@
     </script>
 
     <script>
-      const modal = document.getElementById('miModal');
-      const openBtn = document.getElementById('openBtn');
-      const cancelBtn = document.getElementById('cancelBtn');
-      const confirmBtn = document.getElementById('confirmBtn');
+      const modal = document.getElementById('miModal')
+      const openBtn = document.getElementById('openBtn')
+      const cancelBtn = document.getElementById('cancelBtn')
+      const confirmBtn = document.getElementById('confirmBtn')
 
       openBtn.addEventListener('click', () => {
         modal.showModal(); // abre como modal (bloquea interacción con el fondo)
-      });
+      })
 
       cancelBtn.addEventListener('click', () => {
         //modal.close();
-      });
+      })
 
       confirmBtn.addEventListener('click', () => {
         //console.log('Acción confirmada');
         //modal.close();
-      });
+      })
     </script>
 </body>
 </html>

@@ -35,11 +35,11 @@
         function getData(){
             let camptext    = document.getElementById('nombreID').value
             let cuerpoTBL   = document.getElementById('cuerpo')
-            let url         = '../../admin/query/3_BuscarRegistroPastor_PHP.php'
+            let url         = '../../admin/crud/read/3_BuscarRegistroPastor_PHP.php'
             let formaData   = new FormData()
             formaData.append('nombrePOSTEnviarPHP', camptext)
 
-            // ← aquí agregamos la limpieza
+            // aquí agregamos la limpieza
             if (camptext === '' || camptext === null) {
                 document.getElementById('dniID').value = '0'
             }
@@ -65,7 +65,7 @@
         formaData.append('dniPOSTParaPHP', dni)
         formaData.append('nombrePOSTParaPHP', nombre)
 
-        fetch('../../admin/query/4_SeleccionarDelegacion_PHP.php', {
+        fetch('../../admin/crud/read/4_SeleccionarDelegacion_PHP.php', {
             method: 'POST',
             body: formaData
             })
