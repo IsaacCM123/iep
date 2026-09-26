@@ -1,6 +1,6 @@
 <?php
 require __DIR__ . '/../../core/1_conexion.php';
-$EjecutarConsulta = 'SELECT dniPastor,nombreCompleto FROM tbl_pastor';
+$EjecutarConsulta = 'SELECT dniPastor,nombreCompleto,categoria,extra,telefono,FK_idMesa FROM tbl_pastor';
 $CargarValoresDeLaconsulta = mysqli_query($conexion,$EjecutarConsulta);
 $HTML='';
 if ($CargarValoresDeLaconsulta)
@@ -9,6 +9,10 @@ while($fila=mysqli_fetch_assoc($CargarValoresDeLaconsulta)){
 $HTML .="<tr>";
 $HTML .="<td>".$fila['dniPastor']."</td>";
 $HTML .="<td>".$fila['nombreCompleto']."</td>";
+$HTML .="<td>".$fila['categoria']."</td>";
+$HTML .="<td>".$fila['extra']."</td>";
+$HTML .="<td>".$fila['telefono']."</td>";
+$HTML .="<td>".$fila['FK_idMesa']."</td>";
 $HTML .="<td><ion-icon name='reader-sharp'></ion-icon></td>";
 $HTML .="<td><ion-icon name='remove-circle-sharp'></ion-icon></td>";
 $HTML .="<td><a href='../../admin/crud/delete/9_EliminarPastor.php?DNI=".$fila['dniPastor']."'><ion-icon name='trash-sharp'></ion-icon></a></td>";
