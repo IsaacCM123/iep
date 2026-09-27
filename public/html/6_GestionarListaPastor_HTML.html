@@ -166,12 +166,12 @@
     <!--Editar o Actualizar registro..................INICIO-->
     <dialog id="modalDialog" closedby="any">
         <div class="contenido">
-            <form method="POST" action="aaaa.php">
+            <form method="POST" action="../../admin/crud/update/10_ActualizarRegistroPastor_PHP.php">
 
-                <input type="text" id="campoDni" name="">
-                <input type="text" id="campoNombre" name="">
+                <input type="text" id="campoDni" name="dniUpdate_POST" readonly>
+                <input type="text" id="campoNombre" name="nombreUpdate_POST">
 
-                <select id="campoCategoria">
+                <select id="campoCategoria" name="categoriaUpdate_POST">
                     <option value="">CATEGORIA</option>
                     <option value="PRESBITERO">PRESBITERO</option>
                     <option value="DIACONO">DIACONO</option>
@@ -180,7 +180,7 @@
                     <option value="AYUDANTE">AYUDANTE</option>
                 </select>
 
-                <input type="text" id="campoExtra" list="listaExtra">
+                <input type="text" id="campoExtra" list="listaExtra" name="extraUpdate_POST">
                 <datalist id="listaExtra">
                     <option value="ENCARGADO DE OBRA">Requisito Opcional.</option>
                     <option value="SUPERINTENDENTE">Requisito Opcional.</option>
@@ -191,9 +191,9 @@
                     <option value="VOCAL">Requisito Opcional.</option>
                 </datalist>
 
-                <input type="text" id="campoTelefono" name="">
+                <input type="text" id="campoTelefono" name="telefonoUpdate_POST">
 
-                <input placeholder="ASIGNAR MESA.." type="text" id="campoMesa" list="Mesa" name="MESA_POST">
+                <input placeholder="ASIGNAR MESA.." type="text" id="campoMesa" list="Mesa" name="mesaUpdate_POST">
                 <datalist id="Mesa">
                     <option value="Mesa-001">MOISÉS</option>
                     <option value="Mesa-002">PABLO</option>

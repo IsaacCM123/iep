@@ -1,8 +1,6 @@
 <?php
     require __DIR__ . '/../../core/1_conexion.php';
 
-    $mensaje = "";
-
     if($_SERVER["REQUEST_METHOD"]==="POST"){
 
     $dni        = trim($_POST['DNI_POST']       ?? "");
