@@ -151,15 +151,11 @@
             </form>
         </div>
     </dialog>
+    <button id="openBtn">Registrar</button><br><!--Abrir el Modal..!-->
+    <ion-icon name="person-add-sharp"></ion-icon>
     <!--Modal para agregar nuevo pastor ....................FINAL-->
 
-    <button id="openBtn">Registrar</button><br><!--Abrir el Modal..!-->
 
-    <input type="text" name="nombrePOST" id="nombreID" placeholder="Nombre...">
-    <table>
-        <thead><!--<tr><th>Nombre Completo</th></tr>--></thead>
-        <tbody id="cuerpoTBL"></tbody>
-    </table>
 
 
 
@@ -235,19 +231,69 @@
     <!--Editar o Actualizar registro..................FINAL-->
 
 
+    <!--Nuevo DIALOG para ELIMINAR registro pastor ........................INICIO-->
+    <dialog id="modalConfirmarEliminar" closedby='any'>
+        <p>¿Realmente quieres ejecutar esta accion?</p>
+        <button id="btnRechazarEliminacion">Rechazar</button>
+        <button id="btnContinuarEliminacion">Continuar</button>
+    </dialog>
+    <!--Nuevo DIALOG para ELIMINAR registro pastor ........................FINAL-->
+
+
+
+
+
+    <!--Panel Principal (BUSCAR PASTOR PARA CONSTRUIR MINISTERIO-DELEGACION.......INICIO)-->
+    <form id="formularioConstruirDelegacion">
+        <input type="text" name="dniPastorPOST" id="dniPastorID" placeholder="0" readonly><br>
+        <input type="text" name="nombrePOST" id="nombreID" placeholder="Nombre..."><br><br>
+        <button type="submit">Plataforma Delegacion</button>
+    </form>
+
+    <table>
+        <thead><!--<tr><th>Nombre Completo</th></tr>--></thead>
+        <tbody id="cuerpoTBL"></tbody>
+    </table>
+    <!--Panel Principal (BUSCAR PASTOR PARA CONSTRUIR MINISTERIO-DELEGACION.........FINAL)-->
+
     <!--Cargamos el registro de todos los pastores........................INICIO-->
     <script>
-        const datoFormateado = new FormData()
-        datoFormateado.append('ClaveNombrePost_QueryPHP',document.getElementById('nombreID').value)
+        function obtenerDato(fila){
+            let campoID         = document.getElementById('nombreID')
+            let campoDNI        = document.getElementById('dniPastorID')
 
-        fetch('../../admin/crud/read/7_GestionarListaPastor_PHP.php',{method:'POST',body:datoFormateado})
-        .then(response=>response.json())
-        .then(valoresDePHP=>{
-            document.getElementById('cuerpoTBL').innerHTML = valoresDePHP
-        })
+            campoDNI.value      = fila.cells[0].innerHTML//Por que es label. fila.cells[0] = DNI (primera celda)
+            campoID.value       = fila.cells[1].innerHTML//Por que es input. fila.cells[1] = Nombre (segunda celda)
+        }
+    </script>
+
+
+    <script>
+        conseguirDatos()
+        document.getElementById('nombreID').addEventListener('keyup',conseguirDatos)
+        function conseguirDatos(){
+            const datoFormateado = new FormData()
+            datoFormateado.append('ClaveNombrePost_QueryPHP',document.getElementById('nombreID').value)
+
+            // aquí agregamos la limpieza
+            if (document.getElementById('nombreID').value === '' || document.getElementById('nombreID').value === null) {
+                document.getElementById('dniPastorID').value = '0'
+            }
+
+            fetch('../../admin/crud/read/7_GestionarListaPastor_PHP.php',{method:'POST',body:datoFormateado})
+            .then(response=>response.json())
+            .then(valoresDePHP=>{
+                document.getElementById('cuerpoTBL').innerHTML = valoresDePHP
+            })    
+        }
+        
     </script>
     <!--Cargamos el registro de todos los pastores........................FINAL-->
 
+
+
+
+    <!--Dialog para AGREGAR o REGISTRAR nuevo pastor ........................INICIO-->
     <script>
       const modal = document.getElementById('miModal')
       const openBtn = document.getElementById('openBtn')
@@ -267,6 +313,10 @@
         //modal.close();
       })
     </script>
+    <!--Dialog para AGREGAR o REGISTRAR nuevo pastor ........................FINAL-->
+
+
+
 
     <!--Editar o Actualizar registro...........INICIO-->
     <script>
@@ -288,6 +338,67 @@
         })
     </script>
     <!--Editar o Actualizar registro............FINAL-->
+
+
+
+
+    <!--Eliminar registro con confirmacion ........................INICIO-->
+    <script>
+            // Variable donde guardamos temporalmente la URL de eliminación,
+            // mientras esperamos que el usuario confirme o rechace la acción.
+            let urlEliminarPendiente = null
+
+            // Delegación de eventos: escuchamos los clicks en el contenedor de la tabla (cuerpoTBL),
+            // porque las filas (y los links de eliminar) se generan dinámicamente después del fetch,
+            // y por lo tanto no existen todavía al momento de cargar la página.
+            document.getElementById('cuerpoTBL').addEventListener('click', function(e) {
+
+                // Buscamos si el elemento donde se hizo click (o alguno de sus padres cercanos)
+                // tiene la clase 'eliminarRegistro'. Esto detecta el click sin importar si cayó
+                // exactamente en el <a> o en el <ion-icon> que está dentro de él.
+                const enlaceEliminar = e.target.closest('.eliminarRegistro')
+
+                // Si el click NO fue en el ícono/link de eliminar, no hacemos nada
+                // (evita que el modal se abra al hacer click en otra parte de la fila).
+                if (!enlaceEliminar) return
+
+                // Evitamos que el navegador siga el href inmediatamente.
+                // Sin esto, la eliminación se ejecutaría al instante, sin dar tiempo a confirmar.
+                e.preventDefault()
+
+                // Guardamos la URL real de eliminación (con el DNI ya incluido en el query string)
+                // para poder usarla después, solo si el usuario confirma.
+                urlEliminarPendiente = enlaceEliminar.href
+
+                // Mostramos el modal de confirmación.
+                modalConfirmarEliminar.showModal()
+            })
+
+            // Botón "Continuar": el usuario decidió seguir adelante con la eliminación.
+            document.getElementById('btnContinuarEliminacion').addEventListener('click', function() {
+
+                // Verificamos que exista una URL pendiente (por seguridad, evita ejecutar algo vacío).
+                if (urlEliminarPendiente) {
+
+                    // Recién aquí navegamos a la URL real, lo que dispara la petición GET
+                    // hacia 9_EliminarPastor.php y ejecuta el DELETE en la base de datos.
+                    window.location.href = urlEliminarPendiente
+                }
+            })
+
+            // Botón "Rechazar": el usuario decidió cancelar la acción.
+            document.getElementById('btnRechazarEliminacion').addEventListener('click', function() {
+
+                // Limpiamos la variable para no dejar una URL "colgada" que se pueda
+                // ejecutar por error en otro momento.
+                urlEliminarPendiente = null
+
+                // Cerramos el modal sin haber navegado a ningún lado.
+                modalConfirmarEliminar.close()
+            })
+    </script>
+    <!--Eliminar registro con confirmacion ........................FINAL-->
+
 
     <script type="module"src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.esm.js"></script>
 </body>
