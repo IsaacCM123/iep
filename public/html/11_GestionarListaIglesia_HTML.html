@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title></title>
+        <style>
+            dialog{
+                border: none;
+                background: #f4eaff;
+                border-radius: 2em;
+            }
+        </style>
+    </head>
+    <body>
+        <!--Modal Para AGREGAR o REGISTRAR nueva Iglesia....................INICIO-->
+        <button command="show-modal" commandfor="dialog">Agregar Nueva Iglesia</button>
+
+        <dialog id="dialog" closedby="any">
+            <button id="cerrar">Cerrar...</button>
+            <h3>Agregar Iglesia</h3>
+            <form method="POST" action="../../admin/crud/create/13_RegistrarNuevaIglesia_PHP.php">
+                <input type="text" name="IGLESIA_POST" placeholder="Nombre Iglesia.."><br>
+                <label>Ejm: CENTRAL TRINIDAD</label><br><br>
+                <input type="text" name="CIUDAD_POST" placeholder="Ciudad.."><br>
+                <label>Ejm: ORURO</label><br><br>
+                <input type="text" name="PAIS_POST" placeholder="Pais.."><br>
+                <label>Ejm: BOLIVIA</label><br><br>
+                <input type="text" name="ZONA_POST" placeholder="zona.."><br>
+                <label>Ejm: 5</label><br><br>
+                <p>¿Estás seguro de que deseas continuar? Esta acción no se puede deshacer.</p>
+
+                <input type="reset"value='Limpiar'>
+                <input type="submit"value='Registrar'>
+            </form>
+        </dialog>
+        <!--Modal Para AGREGAR o REGISTRAR nueva Iglesia......................FINAL-->
+
+
+        <!--Modal Para ACTUALIZAR Iglesia....................................INICIO-->
+        <dialog id="modalDialog" closedby="any">
+            <h3>Actualizar Datos Iglesia</h3>
+
+            <form method="POST" action="../../admin/crud/update/14_ActualizarRegistroIglesia_PHP.php">
+                <input type="text" name="idIglesiaUpdate_Post" id="idIglesiaUpdateID" readonly>
+                <input type="text" name="iglesiaUpdate_Post" id="iglesiaUpdateID" placeholder="IGLESIA..">
+                <input type="text" name="ciudadUpdate_Post" id="ciudadUpdateID" placeholder="CIUDAD..">
+                <input type="text" name="paisUpdate_Post" id="paisUpdateID" placeholder="PAIS..">
+                <input type="text" name="zonaUpdate_Post" id="zonaUpdateID" placeholder="ZONA..">
+
+                <p>¿Estás seguro de que deseas continuar? Esta acción no se puede deshacer.</p>
+
+                <input type="button" id="cerrarModal" value="Cancelar">
+                <input type="submit" value="Actualizar">
+            </form>
+        </dialog>
+        <!--Modal Para ACTUALIZAR Iglesia.....................................FINAL-->
+
+
+        <!--Modal Para ELIMINAR Iglesia....................................INICIO-->
+        <dialog id="modalDialogDelete" closedby="any">
+            <h3>Eliminar Iglesia</h3>
+
+            <form method="POST" action="../../admin/crud/delete/15_EliminarRegistroIglesia_PHP.php">
+                <input type="text" name="idIglesiaDeletePOST" id="idIglesiaDeleteID" readonly><br>
+                <input type="text" id="iglesiaDeleteID" readonly><br>
+                <input type="text" id="ciudadDeleteID" readonly><br>
+                <input type="text" id="paisDeleteID" readonly><br>
+                <input type="text" id="zonaDeleteID" readonly><br><br>
+
+                <p>¿Estás seguro de que deseas continuar? Esta acción no se puede deshacer.</p>
+
+                <input type="button" id="cerrarModalEliminar" value="Cancelar">
+                <input type="submit" value="Eliminar">
+            </form>
+        </dialog>
+        <!--Modal Para ELIMINAR Iglesia.....................................FINAL-->
+
+
+        <input type="text" name="" id="idIglesiaID" readonly><br><br>
+        <input type="text" name="" id="nombreIglesiaID">
+        <table>
+            <thead><th>ID</th><th>Nombre Iglesia</th><th>Ciudad</th><th>pais</th><th>zona</th></thead>
+            <tbody id="cuerpoTBL"></tbody>
+        </table>
+
+        <script>
+            document.getElementById('cerrar').addEventListener('click', () => {
+                document.getElementById('dialog').close()
+              })
+
+            document.getElementById('cerrarModal').addEventListener('click',()=>{
+                document.getElementById('modalDialog').close()
+            })
+
+            document.getElementById('cerrarModalEliminar').addEventListener('click',()=>{
+                document.getElementById('modalDialogDelete').close()
+            })
+        </script>
+
+        <script>
+                obtenerDatos()
+                document.getElementById('nombreIglesiaID').addEventListener('keyup',obtenerDatos)
+                function obtenerDatos(){
+                    const datoDelCampoTxtClaveValor = new FormData()
+                    datoDelCampoTxtClaveValor.append('nombreIglesiaPostParaPHP',document.getElementById('nombreIglesiaID').value)
+
+                    if (document.getElementById('nombreIglesiaID').value === ''
+                        || document.getElementById('nombreIglesiaID').value === null){
+                        document.getElementById('idIglesiaID').value = '0'
+                    }
+                    
+                    fetch('../../admin/crud/read/12_GestionarListaIglesia_PHP.php',{method:'POST',body:datoDelCampoTxtClaveValor})
+                    .then(response=>response.json())
+                    .then(valoresDePHP=>{document.getElementById('cuerpoTBL').innerHTML=valoresDePHP})
+                }
+
+                function copiarDatos(todaLafila){
+                    document.getElementById('idIglesiaID').value        = todaLafila.cells[0].innerHTML
+                    document.getElementById('nombreIglesiaID').value    = todaLafila.cells[1].innerHTML
+                }
+        </script>
+
+        <!--ACTUALIZAR REGISTRO DE LA IGLESIA.............................................INICIO-->
+        <script>
+            document.getElementById('cuerpoTBL').addEventListener('click',(e)=>{
+                const iconoEditar=e.target.closest('.actualizarRegistro')
+                if (!iconoEditar) return // si el click fue en otra parte de la fila, no hace nada
+
+                const fila=iconoEditar.closest('tr')
+
+                document.getElementById('idIglesiaUpdateID').value = fila.cells[0].innerHTML
+                document.getElementById('iglesiaUpdateID').value = fila.cells[1].innerHTML
+                document.getElementById('ciudadUpdateID').value = fila.cells[2].innerHTML
+                document.getElementById('paisUpdateID').value = fila.cells[3].innerHTML
+                document.getElementById('zonaUpdateID').value = fila.cells[4].innerHTML
+
+                modalDialog.showModal()
+            })
+        </script>
+        <!--ACTUALIZAR REGISTRO DE LA IGLESIA...............................................FINAL-->
+
+
+
+        <!--ELIMINAR REGISTRO DE LA IGLESIA................................................INICIO-->
+        <script>
+            document.getElementById('cuerpoTBL').addEventListener('click',(e)=>{
+                const iconoEliminar=e.target.closest('.eliminarRegistro')
+                if (!iconoEliminar) return
+
+                const filaEliminar=iconoEliminar.closest('tr')
+
+                document.getElementById('idIglesiaDeleteID').value = filaEliminar.cells[0].innerHTML
+                document.getElementById('iglesiaDeleteID').value = filaEliminar.cells[1].innerHTML
+                document.getElementById('ciudadDeleteID').value = filaEliminar.cells[2].innerHTML
+                document.getElementById('paisDeleteID').value = filaEliminar.cells[3].innerHTML
+                document.getElementById('zonaDeleteID').value = filaEliminar.cells[4].innerHTML
+
+                modalDialogDelete.showModal()
+            })
+        </script>
+        <!--ELIMINAR REGISTRO DE LA IGLESIA.................................................FINAL-->
+
+        <script type="module"src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.esm.js"></script>
+    </body>
+</html>
