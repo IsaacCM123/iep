@@ -28,7 +28,7 @@
                 <label>Ejm: BOLIVIA</label><br><br>
                 <input type="text" name="ZONA_POST" placeholder="zona.."><br>
                 <label>Ejm: 5</label><br><br>
-                <p>¿Estás seguro de que deseas continuar? Esta acción no se puede deshacer.</p>
+                <p>¿Estás seguro de que deseas Registrar? Esta acción no se puede deshacer.</p>
 
                 <input type="reset"value='Limpiar'>
                 <input type="submit"value='Registrar'>
@@ -48,7 +48,7 @@
                 <input type="text" name="paisUpdate_Post" id="paisUpdateID" placeholder="PAIS..">
                 <input type="text" name="zonaUpdate_Post" id="zonaUpdateID" placeholder="ZONA..">
 
-                <p>¿Estás seguro de que deseas continuar? Esta acción no se puede deshacer.</p>
+                <p>¿Estás seguro de Actualizar este Registro? Esta acción no se puede deshacer.</p>
 
                 <input type="button" id="cerrarModal" value="Cancelar">
                 <input type="submit" value="Actualizar">
@@ -68,7 +68,7 @@
                 <input type="text" id="paisDeleteID" readonly><br>
                 <input type="text" id="zonaDeleteID" readonly><br><br>
 
-                <p>¿Estás seguro de que deseas continuar? Esta acción no se puede deshacer.</p>
+                <p>¿Realmente quieres Eliminar este Registro? Esta acción no se puede deshacer.</p>
 
                 <input type="button" id="cerrarModalEliminar" value="Cancelar">
                 <input type="submit" value="Eliminar">
@@ -76,39 +76,41 @@
         </dialog>
         <!--Modal Para ELIMINAR Iglesia.....................................FINAL-->
 
-
+        <!--Descargamos todos los registros de Iglesia en cuerpoTBL.................INICIO-->
         <input type="text" name="" id="idIglesiaID" readonly><br><br>
         <input type="text" name="" id="nombreIglesiaID">
         <table>
             <thead><th>ID</th><th>Nombre Iglesia</th><th>Ciudad</th><th>pais</th><th>zona</th></thead>
             <tbody id="cuerpoTBL"></tbody>
         </table>
+        <!--Descargamos todos los registros de Iglesia en cuerpoTBL.................INICIO-->
 
+
+        <!--Solamente es cerrar Modal de Agregar, Actualizar, Eliminar................INICIO-->
         <script>
-            document.getElementById('cerrar').addEventListener('click', () => {
-                document.getElementById('dialog').close()
-              })
+            document.getElementById('cerrar').addEventListener('click',()=>{
+            document.getElementById('dialog').close()})
 
             document.getElementById('cerrarModal').addEventListener('click',()=>{
-                document.getElementById('modalDialog').close()
-            })
+            document.getElementById('modalDialog').close()})
 
             document.getElementById('cerrarModalEliminar').addEventListener('click',()=>{
-                document.getElementById('modalDialogDelete').close()
-            })
+            document.getElementById('modalDialogDelete').close()})
         </script>
+        <!--Solamente es cerrar Modal de Agregar, Actualizar, Eliminar................FINAL-->
 
+
+        <!--Descargamos todos los registros de Iglesia en cuerpoTBL.................INICIO-->
         <script>
                 obtenerDatos()
                 document.getElementById('nombreIglesiaID').addEventListener('keyup',obtenerDatos)
                 function obtenerDatos(){
-                    const datoDelCampoTxtClaveValor = new FormData()
+                    const datoDelCampoTxtClaveValor=new FormData()
                     datoDelCampoTxtClaveValor.append('nombreIglesiaPostParaPHP',document.getElementById('nombreIglesiaID').value)
 
                     if (document.getElementById('nombreIglesiaID').value === ''
                         || document.getElementById('nombreIglesiaID').value === null){
-                        document.getElementById('idIglesiaID').value = '0'
-                    }
+                        document.getElementById('idIglesiaID').value = '0'}
                     
                     fetch('../../admin/crud/read/12_GestionarListaIglesia_PHP.php',{method:'POST',body:datoDelCampoTxtClaveValor})
                     .then(response=>response.json())
@@ -120,6 +122,8 @@
                     document.getElementById('nombreIglesiaID').value    = todaLafila.cells[1].innerHTML
                 }
         </script>
+        <!--Descargamos todos los registros de Iglesia en cuerpoTBL.................FINAL-->
+
 
         <!--ACTUALIZAR REGISTRO DE LA IGLESIA.............................................INICIO-->
         <script>
