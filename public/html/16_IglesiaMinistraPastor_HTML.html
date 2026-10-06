@@ -6,6 +6,26 @@
     <title></title>
 </head>
 <body>
-    <h3>Pagina Ministerio Iglesia Pastor...</h3>
+    <table>
+        <thead>
+            <th>Id</th>
+            <th>Iglesia</th>
+            <th>ciudad</th>
+            <th>Pais</th>
+            <th>Zona</th>
+            <th>Ministra</th>
+            <th>Dni</th>
+            <th>Ministro</th>
+            <th>Categoria</th>
+            <th>Telefono</th>
+        </thead>
+        <tbody id="cuerpoTBL"></tbody>
+    </table>
+
+    <script>
+        fetch('../../admin/crud/read/17_IglesiaMinistraPastor_PHP.php',{method:'POST'})
+        .then(response=>response.json())
+        .then(valoresDePHP=>{document.getElementById('cuerpoTBL').innerHTML=valoresDePHP})
+    </script>
 </body>
 </html>

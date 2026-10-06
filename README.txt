@@ -105,7 +105,14 @@ GROUP BY
 
 
 
+SELECCIONAR TODAS LAS IGLESIAS CON SUS RESPECTIVOS MINISTROS, AHORA SI NO CUENTAN CON UN MINISTRO EL CAMPO SEA [NULL]:
 
+SELECT 
+    i.nombreIglesia,
+    p.nombreCompleto
+FROM tbl_iglesia i
+LEFT JOIN tbl_ministerio m ON m.PKFK_idIglesia = i.idIglesia
+LEFT JOIN tbl_pastor p     ON p.dniPastor = m.FK_dniPastor;
 
 
 
