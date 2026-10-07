@@ -4,13 +4,25 @@ require __DIR__ . '/../../core/1_conexion.php';
 $peticionAlServidor =   "SELECT i.idIglesia,i.nombreIglesia,i.ciudad,i.pais,i.zona,p.dniPastor,p.nombreCompleto,p.categoria,p.telefono
                         FROM tbl_iglesia i
                         LEFT JOIN tbl_ministerio m ON m.PKFK_idIglesia = i.idIglesia
-                        LEFT JOIN tbl_pastor p     ON p.dniPastor = m.FK_dniPastor";
+                        LEFT JOIN tbl_pastor p     ON p.dniPastor = m.FK_dniPastor
+                        ORDER BY i.nombreIglesia ASC";
+
+//keyup para buscar nombre desde campo de texto nombrePOST ...................................
+$N_I = isset($_POST['nombreIglesiaPostParaPHP']) ? $conexion->real_escape_string($_POST['nombreIglesiaPostParaPHP']) : null;
+    if ($N_I != null)
+    {
+    $peticionAlServidor="SELECT i.idIglesia,i.nombreIglesia,i.ciudad,i.pais,i.zona,p.dniPastor,p.nombreCompleto,p.categoria,p.telefono
+                        FROM tbl_iglesia i
+                        LEFT JOIN tbl_ministerio m ON m.PKFK_idIglesia = i.idIglesia
+                        LEFT JOIN tbl_pastor p     ON p.dniPastor = m.FK_dniPastor
+                        WHERE i.nombreIglesia LIKE '%".$N_I."%'";}
+//............................................................................................
 
 $resultado = mysqli_query($conexion,$peticionAlServidor);
 $HTML = "";
 if($resultado){
     while ($fila = mysqli_fetch_assoc($resultado)) {
-        $HTML .="<tr>";
+        $HTML .="<tr onclick='copiarDatos(this)'>";
         $HTML .="<td>".$fila['idIglesia']."</td>";
         $HTML .="<td>".$fila['nombreIglesia']."</td>";
         $HTML .="<td>".$fila['ciudad']."</td>";

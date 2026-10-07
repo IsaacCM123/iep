@@ -6,6 +6,34 @@
     <title></title>
 </head>
 <body>
+    <dialog id="dialog" closedby="any">
+        <h3>Actualizar Ministerio</h3>
+
+        <form method="POST" action="../../admin/crud/create/19_RegistrarMinisterio_PHP.php">
+            <input type="text" name="idIglesiaPOST" id="idIglesiaID" readonly><br>
+            <input type="text" id="nombreIglesia" readonly><br>
+            <input type="text" id="ciudadID" readonly><br><br>
+            <label>Ministra:</label><br>
+            <input type="button" id="btn_quitarValoresTresCamposID" value="Quitar Ministro..."><br>
+            <input type="text" name="dniPastorPOST" id="IdPastorID" readonly><br>
+            <input type="text" id="nombrePastorID" readonly><br>
+            <input type="text" id="categoriaID" readonly><br>
+
+            <p>¿Está seguro de Actualizar este Ministerio? Esta acción no se puede deshacer.</p>
+            <input type="button" id="cerrar" value="Cerrar">
+            <input type="submit" value="Actualizar">
+        </form><br><br>
+        
+        <input type="text" id="buscarMinistroID" placeholder="Buscar Ministro..">
+        <table>
+            <tbody id="listaPastoresTBL"></tbody>
+        </table>
+    </dialog>
+
+    
+    <input type="text" id="buscarNombreIglesiaID" placeholder="Buscar Iglesia.."><br>
+    
+    <!--MODAL para gestionar Ministerio........................FINAL-->
     <table>
         <thead>
             <th>Id</th>
@@ -22,10 +50,65 @@
         <tbody id="cuerpoTBL"></tbody>
     </table>
 
+    <!--DIALOG - Buscar Pastor Para Ministrar.........................................INICIO-->
     <script>
-        fetch('../../admin/crud/read/17_IglesiaMinistraPastor_PHP.php',{method:'POST'})
-        .then(response=>response.json())
-        .then(valoresDePHP=>{document.getElementById('cuerpoTBL').innerHTML=valoresDePHP})
+        obtenerDatos()
+        document.getElementById('buscarMinistroID').addEventListener('keyup',obtenerDatos)
+        function obtenerDatos(){
+            const datoDelCampoTxtClaveValor=new FormData()
+            datoDelCampoTxtClaveValor.append('nombreMinistroPostParaPHP',document.getElementById('buscarMinistroID').value)
+
+        fetch('../../admin/crud/read/18_BuscarPastorParaMinistrar_PHP.php',{method:'POST',body:datoDelCampoTxtClaveValor})
+            .then(response=>response.json())
+            .then(valoresDePHP=>{document.getElementById('listaPastoresTBL').innerHTML=valoresDePHP})
+        }
+
+        function copiarDatosMinistro(filaSeleccionada){
+            document.getElementById('IdPastorID').value      = filaSeleccionada.cells[0].innerHTML
+            document.getElementById('nombrePastorID').value  = filaSeleccionada.cells[1].innerHTML
+            document.getElementById('categoriaID').value     = filaSeleccionada.cells[2].innerHTML
+        }
+
+        // quitar Ministro de una Iglesia......INICIO
+        document.getElementById('btn_quitarValoresTresCamposID').addEventListener('click',()=>{
+            document.getElementById('IdPastorID').value = ''
+            document.getElementById('nombrePastorID').value = ''
+            document.getElementById('categoriaID').value = ''
+        })
+        // quitar Ministro de una Iglesia........FINAL
+
+    </script>
+    <!--DIALOG - Buscar Pastor Para Ministrar...........................................FINAL-->
+
+
+    <script>
+        obtenerDatos()
+        document.getElementById('buscarNombreIglesiaID').addEventListener('keyup',obtenerDatos)
+        function obtenerDatos(){
+            const datoDelCampoTxtClaveValor=new FormData()
+            datoDelCampoTxtClaveValor.append('nombreIglesiaPostParaPHP',document.getElementById('buscarNombreIglesiaID').value)
+
+            fetch('../../admin/crud/read/17_IglesiaMinistraPastor_PHP.php',{method:'POST',body:datoDelCampoTxtClaveValor})
+            .then(response=>response.json())
+            .then(valoresDePHP=>{document.getElementById('cuerpoTBL').innerHTML=valoresDePHP})
+        }
+
+        function copiarDatos(todaLafila){
+            document.getElementById('idIglesiaID').value            = todaLafila.cells[0].innerHTML
+            document.getElementById('buscarNombreIglesiaID').value  = todaLafila.cells[1].innerHTML
+            document.getElementById('nombreIglesia').value          = todaLafila.cells[1].innerHTML
+            document.getElementById('ciudadID').value               = todaLafila.cells[2].innerHTML
+            document.getElementById('IdPastorID').value             = todaLafila.cells[6].innerHTML
+            document.getElementById('nombrePastorID').value         = todaLafila.cells[7].innerHTML
+            document.getElementById('categoriaID').value            = todaLafila.cells[8].innerHTML
+
+            document.getElementById('dialog').showModal()
+        }
+
+        document.getElementById('cerrar').addEventListener('click',()=>{
+            document.getElementById('dialog').close()
+        })
+
     </script>
 </body>
 </html>
