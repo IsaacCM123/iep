@@ -1,10 +1,10 @@
 <?php
 require __DIR__ . '/../../core/1_conexion.php';
 
-$dni = $_POST['dniPOSTParaPHP'];
-$nombre = $_POST['nombrePOSTParaPHP'];
+$dni = $_POST['dniPastorEnviarPhp_POST'];
 
-$Seleccionar = "SELECT      p.categoria,
+$Seleccionar = "SELECT      p.nombreCompleto,
+                            p.categoria,
                             p.extra,
                             p.telefono,
                             i.nombreIglesia,
@@ -47,7 +47,7 @@ if($resultado){
     if($fila = mysqli_fetch_assoc($resultado)) {
         $datos = [
             'dni'           => $dni,
-            'nombre'        => $nombre,
+            'nombre'        => $fila['nombreCompleto'],
             'categoria'     => $fila['categoria'],
             'extra'         => $fila['extra'],
             'telefono'      => $fila['telefono'],

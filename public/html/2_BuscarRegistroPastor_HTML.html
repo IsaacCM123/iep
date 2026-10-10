@@ -6,34 +6,70 @@
 	<title></title>
 </head>
 <body>
-    <form id="formBuscar">
-        <input type="text" name="nombrePOST" id="nombreID" placeholder="Nombre..." autofocus autocomplete="off"><br><br>
-        <input type="text" name="dniPOST" id="dniID" placeholder="0" readonly><br><br>
-        <button type="submit">Delegacion</button>
-    </form>
+    
+    <input type="text" name="nombrePOST" id="buscarMinistroID" placeholder="Nombre Ministro..." autofocus autocomplete="off"><br><br>
+    
+    <dialog id="modalDialogRegistroPastorID" closedby='any'>
+        <h3>Registro Ministro.</h3>
+        <form method="GET" action="5_SeleccionarDelegacion_HTML.html">
+            <input type="text" id="dniPastorID" name="dniGetxxxxx" placeholder="0" readonly><br>
+            <input type="text" id="nombreMinistroID" readonly><br>
+            <input type="text" id="categoriaMinistroID" readonly><br>
+            <input type="text" id="telefonoMinistroID" readonly><br>
+            <p>¿Deseas Dirigirte a Delegacion?.<br>(Grupo de Representantes de una Iglesia.)</p>
+            <input type="button" id="cancelarID" value="cancelar">
+            <button type="submit">Delegacion</button>
+        </form>    
+    </dialog>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	<table>
 		<thead align='center'>
-            <tr><th>Dni</th><th>Nombre Completo</th></tr>
+            <tr><th>D.n.i.</th><th>Nombre Ministro</th><th>Categoria</th><th>Telefono</th></tr>
         </thead>
 		<tbody id="cuerpo"><!--Aqui se insertara la lista de pastores con .JSON--></tbody>
 	</table>
 
 	<script>
-        function obtenerDato(fila){
-            let campoID         = document.getElementById('nombreID')
-            let campoDNI        = document.getElementById('dniID')
-
-            campoDNI.value      = fila.cells[0].innerHTML//Por que es label. fila.cells[0] = DNI (primera celda)
-            campoID.value       = fila.cells[1].innerHTML//Por que es input. fila.cells[1] = Nombre (segunda celda)
+        function obtenerValoresDeLaFilaClickeada(fila){
+            document.getElementById('dniPastorID').value        =fila.cells[0].innerHTML
+            document.getElementById('buscarMinistroID').value   =fila.cells[1].innerHTML
+            document.getElementById('nombreMinistroID').value   =fila.cells[1].innerHTML
+            document.getElementById('categoriaMinistroID').value   =fila.cells[2].innerHTML
+            document.getElementById('telefonoMinistroID').value   =fila.cells[3].innerHTML
+            modalDialogRegistroPastorID.showModal()
         }
     </script>
 
     <script>
+        document.getElementById('cancelarID').addEventListener('click',()=>{
+            modalDialogRegistroPastorID.close()
+            document.querySelector("#buscarMinistroID").focus();
+        })
+    </script>
+
+    <script>
         getData()
-        document.getElementById('nombreID').addEventListener('keyup', getData)
+        document.getElementById('buscarMinistroID').addEventListener('keyup', getData)
         function getData(){
-            let camptext    = document.getElementById('nombreID').value
+            let camptext    = document.getElementById('buscarMinistroID').value
             let cuerpoTBL   = document.getElementById('cuerpo')
             let url         = '../../admin/crud/read/3_BuscarRegistroPastor_PHP.php'
             let formaData   = new FormData()
@@ -41,7 +77,7 @@
 
             // aquí agregamos la limpieza
             if (camptext === '' || camptext === null) {
-                document.getElementById('dniID').value = '0'
+                document.getElementById('dniPastorID').value = '0'
             }
 
             fetch(url, {
@@ -52,29 +88,6 @@
                 cuerpoTBL.innerHTML = data
             })
         }
-    </script>
-
-    <script>
-        document.getElementById('formBuscar').addEventListener('submit', function(e){
-        e.preventDefault()
-
-        const dni = document.getElementById('dniID').value
-        const nombre = document.getElementById('nombreID').value
-
-        const formaData = new FormData()
-        formaData.append('dniPOSTParaPHP', dni)
-        formaData.append('nombrePOSTParaPHP', nombre)
-
-        fetch('../../admin/crud/read/4_SeleccionarDelegacion_PHP.php', {
-            method: 'POST',
-            body: formaData
-            })
-            .then(response => response.json())
-            .then(data => {
-            sessionStorage.setItem('delegacionData', JSON.stringify(data))
-            window.location.href = '5_SeleccionarDelegacion_HTML.html'
-            })
-        })
     </script>
 </body>
 </html>

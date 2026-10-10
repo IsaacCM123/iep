@@ -34,7 +34,7 @@
     </style>
 </head>
 <body>
-    <h1>Delegacion</h1>
+    <h1>Delegacion</h1><br><br><br>
 
     <fieldset>
         <legend>Datos Pastor</legend>
@@ -59,11 +59,11 @@
 
     <fieldset>
         <legend>Datos Delegados</legend>
-        <table><!--delegados!-->
+        <table><!--delegados-->
             <thead align='center'>
                 <tr><th>Nombre Delegado</th><th>Cedula Identidad</th><th>Mesa</th></tr>
             </thead>
-            <tbody id="cuerpoDel"><!--Aqui se insertara la lista de delegados con .JSON--></tbody>
+            <tbody id="cuerpoDel"><!--Aqui se insertara la lista de delegados--></tbody>
         </table>
     </fieldset>
 
@@ -78,49 +78,65 @@
             <thead align='center'>
                 <tr><th>nombre Hijo</th><th>Mesa</th></tr>
             </thead>
-            <tbody id="cuerpoHijo"><!--Aqui se insertara la lista de hijos con JSON--></tbody>
+            <tbody id="cuerpoHijo"><!--Aqui se insertara la lista de hijos--></tbody>
         </table>
     </fieldset>
 
     <script>
-        const cargarDatos = sessionStorage.getItem('delegacionData')
-        if (cargarDatos) {
-            const descargarDatosAqui = JSON.parse(cargarDatos)
+        /*...*/
+    </script>
 
-            document.getElementById('dni').value        = descargarDatosAqui.dni
-            document.getElementById('nombre').value     = descargarDatosAqui.nombre
-            document.getElementById('categoria').value  = descargarDatosAqui.categoria
-            document.getElementById('extra').value      = descargarDatosAqui.extra
-            document.getElementById('telefono').value   = descargarDatosAqui.telefono
-            document.getElementById('iglesia').value    = descargarDatosAqui.iglesia
-            document.getElementById('ciudad').value     = descargarDatosAqui.ciudad
-            document.getElementById('pais').value       = descargarDatosAqui.pais
-            document.getElementById('mesa').value       = descargarDatosAqui.mesa
-            document.getElementById('anfitrion').value  = descargarDatosAqui.anfitrion
-            document.getElementById('celular').value    = descargarDatosAqui.celular
-            document.getElementById('esposa').value     = descargarDatosAqui.esposa
+    <script>
+        document.addEventListener('DOMContentLoaded',()=>{
+            const params    = new URLSearchParams(window.location.search)
+            const dni_Valor = params.get('dniGetxxxxx')
 
-            const cuerpoDel = document.getElementById('cuerpoDel')
-            let filasDelegados = ''
-            descargarDatosAqui.delegadosArray.forEach(d => {
-                filasDelegados += `<tr>
-                    <td>${d.nombre}</td>
-                    <td>${d.cedula}</td>
-                    <td>${d.mesa}</td>
-                </tr>`
+            const datoDelCampoTxtClaveValor=new FormData()
+            datoDelCampoTxtClaveValor.append('dniPastorEnviarPhp_POST',dni_Valor)
+            
+            fetch('../../admin/crud/read/4_SeleccionarDelegacion_PHP.php', {method:'POST', body:datoDelCampoTxtClaveValor})
+            .then(response => response.json())
+            .then(valoresDePHP => {
+
+                // ---- Inputs ----
+                document.getElementById('dni').value       = valoresDePHP.dni
+                document.getElementById('nombre').value    = valoresDePHP.nombre
+                document.getElementById('categoria').value = valoresDePHP.categoria
+                document.getElementById('extra').value     = valoresDePHP.extra
+                document.getElementById('telefono').value  = valoresDePHP.telefono
+                document.getElementById('iglesia').value   = valoresDePHP.iglesia
+                document.getElementById('ciudad').value    = valoresDePHP.ciudad
+                document.getElementById('pais').value      = valoresDePHP.pais
+                document.getElementById('mesa').value      = valoresDePHP.mesa
+                document.getElementById('anfitrion').value = valoresDePHP.anfitrion
+                document.getElementById('celular').value   = valoresDePHP.celular
+                document.getElementById('esposa').value    = valoresDePHP.esposa
+
+                // ---- Delegados ----
+                const cuerpoDel = document.getElementById('cuerpoDel')
+                let filasDelegados = ''
+                valoresDePHP.delegadosArray.forEach(d => {
+                    filasDelegados += `<tr>
+                        <td>${d.nombre}</td>
+                        <td>${d.cedula}</td>
+                        <td>${d.mesa}</td>
+                    </tr>`
+                })
+                cuerpoDel.innerHTML = filasDelegados
+
+                // ---- Hijos ----
+                const cuerpoHijo = document.getElementById('cuerpoHijo')
+                let filasHijos = ''
+                valoresDePHP.hijosArray.forEach(h => {
+                    filasHijos += `<tr>
+                        <td>${h.nombre}</td>
+                        <td>${h.mesa}</td>
+                    </tr>`
+                })
+                cuerpoHijo.innerHTML = filasHijos
             })
-            cuerpoDel.innerHTML = filasDelegados
+        })
 
-            const cuerpoHijo = document.getElementById('cuerpoHijo')
-            let filasHijos = ''
-            descargarDatosAqui.hijosArray.forEach(h => {
-                filasHijos += `<tr>
-                    <td>${h.nombre}</td>
-                    <td>${h.mesa}</td>
-                </tr>`
-            })
-            cuerpoHijo.innerHTML = filasHijos
-        }
     </script>
 
     <script type="module"src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.esm.js"></script>

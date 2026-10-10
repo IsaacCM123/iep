@@ -24,7 +24,7 @@ $HTML .="<td>".$fila['telefono']."</td>";
 $HTML .="<td>".$fila['FK_idMesa']."</td>";
 $HTML .="<td class='editarRegistro'><ion-icon name='reader-sharp'></ion-icon></td>";
 $HTML .="<td><ion-icon name='remove-circle-sharp'></ion-icon></td>";
-$HTML .="<td><a class='eliminarRegistro' href='../../admin/crud/delete/9_EliminarPastor.php?DNI=".$fila['dniPastor']."'><ion-icon name='trash-sharp'></ion-icon></a></td>";
+$HTML .="<td class='eliminarRegistroPastor'><ion-icon name='trash-sharp'></ion-icon></td>";
 $HTML .="</tr>";}
 }
 mysqli_close($conexion);
