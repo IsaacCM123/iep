@@ -34,7 +34,7 @@
     </style>
 </head>
 <body>
-    <h1>Delegacion</h1><br><br><br>
+    <h1>Delegacion</h1><br>
 
     <fieldset>
         <legend>Datos Pastor</legend>
@@ -83,16 +83,12 @@
     </fieldset>
 
     <script>
-        /*...*/
-    </script>
-
-    <script>
         document.addEventListener('DOMContentLoaded',()=>{
             const params    = new URLSearchParams(window.location.search)
-            const dni_Valor = params.get('dniGetxxxxx')
+            const dniValor = params.get('GetDni')
 
             const datoDelCampoTxtClaveValor=new FormData()
-            datoDelCampoTxtClaveValor.append('dniPastorEnviarPhp_POST',dni_Valor)
+            datoDelCampoTxtClaveValor.append('dniPastorEnviarPhp_POST',dniValor)
             
             fetch('../../admin/crud/read/4_SeleccionarDelegacion_PHP.php', {method:'POST', body:datoDelCampoTxtClaveValor})
             .then(response => response.json())
@@ -113,27 +109,25 @@
                 document.getElementById('esposa').value    = valoresDePHP.esposa
 
                 // ---- Delegados ----
-                const cuerpoDel = document.getElementById('cuerpoDel')
                 let filasDelegados = ''
-                valoresDePHP.delegadosArray.forEach(d => {
+                valoresDePHP.delegadosArray.forEach(d=>{
                     filasDelegados += `<tr>
                         <td>${d.nombre}</td>
                         <td>${d.cedula}</td>
                         <td>${d.mesa}</td>
                     </tr>`
                 })
-                cuerpoDel.innerHTML = filasDelegados
+                document.getElementById('cuerpoDel').innerHTML = filasDelegados
 
                 // ---- Hijos ----
-                const cuerpoHijo = document.getElementById('cuerpoHijo')
                 let filasHijos = ''
-                valoresDePHP.hijosArray.forEach(h => {
+                valoresDePHP.hijosArray.forEach(h=>{
                     filasHijos += `<tr>
                         <td>${h.nombre}</td>
                         <td>${h.mesa}</td>
                     </tr>`
                 })
-                cuerpoHijo.innerHTML = filasHijos
+                document.getElementById('cuerpoHijo').innerHTML = filasHijos
             })
         })
 

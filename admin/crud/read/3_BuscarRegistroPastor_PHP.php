@@ -1,13 +1,13 @@
 <?php
 require __DIR__ . '/../../core/1_conexion.php';
 
-$Seleccionar = "SELECT dniPastor,nombreCompleto,categoria,telefono FROM tbl_pastor ORDER BY nombreCompleto ASC";
+$Seleccionar = "SELECT dniPastor,nombreCompleto,categoria,extra,telefono FROM tbl_pastor ORDER BY nombreCompleto ASC";
 
 //keyup para buscar nombre desde campo de texto nombrePOST ...................................
 $N_C = isset($_POST['nombrePOSTEnviarPHP']) ? $conexion->real_escape_string($_POST['nombrePOSTEnviarPHP']) : null;
     if ($N_C != null)
     {
-       $Seleccionar = "SELECT dniPastor,nombreCompleto,categoria,telefono FROM tbl_pastor WHERE nombreCompleto LIKE '%".$N_C."%'";
+       $Seleccionar = "SELECT dniPastor,nombreCompleto,categoria,extra,telefono FROM tbl_pastor WHERE nombreCompleto LIKE '%".$N_C."%'";
     }
 //............................................................................................
 
@@ -19,6 +19,7 @@ if($resultado){
         $HTML       .= "<td>".$fila['dniPastor']."</td>";
         $HTML       .= "<td>".$fila['nombreCompleto']."</td>";
         $HTML       .= "<td>".$fila['categoria']."</td>";
+        $HTML       .= "<td>".$fila['extra']."</td>";
         $HTML       .= "<td>".$fila['telefono']."</td>";
         $HTML       .= "</tr>";}
 }
