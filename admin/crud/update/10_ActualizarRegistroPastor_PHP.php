@@ -8,6 +8,8 @@
 	$variableTel = $_POST['telefonoUpdate_POST'];
 	$variableMes = $_POST['mesaUpdate_POST'];
 
+	if ($variableMes===''){$variableMes = null;}
+
 	$consultaActualizar = $conexion->prepare(
 		"UPDATE tbl_pastor
 		SET 	nombreCompleto = ?, categoria = ?, extra = ?, telefono = ?, FK_idMesa = ?

@@ -151,7 +151,7 @@
             </form>
         </div>
     </dialog>
-    <button id="openBtn">Agregar Pastor</button><br><!--Abrir el Modal..!-->
+    <button id="openBtn">Nuevo Pastor</button><br><!--Abrir el Modal..!-->
     <ion-icon name="person-add-sharp"></ion-icon>
     <!--Modal para agregar nuevo pastor ....................FINAL-->
 
@@ -164,8 +164,8 @@
         <div class="contenido">
             <form method="POST" action="../../admin/crud/update/10_ActualizarRegistroPastor_PHP.php">
 
-                <input type="text" id="campoDni" name="dniUpdate_POST" readonly>
-                <input type="text" id="campoNombre" name="nombreUpdate_POST">
+                <input type="text" id="campoDni" name="dniUpdate_POST" readonly><br>
+                <input type="text" id="campoNombre" name="nombreUpdate_POST"><br>
 
                 <select id="campoCategoria" name="categoriaUpdate_POST">
                     <option value="">CATEGORIA</option>
@@ -174,7 +174,7 @@
                     <option value="PROBANDO">PROBANDO</option>
                     <option value="HONORARIO">HONORARIO</option>
                     <option value="AYUDANTE">AYUDANTE</option>
-                </select>
+                </select><br>
 
                 <input type="text" id="campoExtra" list="listaExtra" name="extraUpdate_POST">
                 <datalist id="listaExtra">
@@ -185,9 +185,9 @@
                     <option value="ANFITRION">Requisito Opcional.</option>
                     <option value="TESORERO">Requisito Opcional.</option>
                     <option value="VOCAL">Requisito Opcional.</option>
-                </datalist>
+                </datalist><br>
 
-                <input type="text" id="campoTelefono" name="telefonoUpdate_POST">
+                <input type="text" id="campoTelefono" name="telefonoUpdate_POST"><br>
 
                 <input placeholder="ASIGNAR MESA.." type="text" id="campoMesa" list="Mesa" name="mesaUpdate_POST">
                 <datalist id="Mesa">
@@ -221,7 +221,7 @@
                     <option value="Mesa-028">ANDRÉS</option>
                     <option value="Mesa-029">NAHUM</option>
                     <option value="Mesa-030">JESÚS</option>
-                </datalist>
+                </datalist><br>
 
                 <input type="button" id="btnCerrarModalActualizar" value="Cancelar">
                 <input type="submit" name="">

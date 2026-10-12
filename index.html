@@ -1,16 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title></title>
 	</head>
 	<body>
-		<h3>User main</h3>
-		<a href="public/html/2_BuscarRegistroPastor_HTML.html">Pastor</a>
-		<a href="#">Anfitrion</a>
-		<a href="public/html/16_IglesiaMinistraPastor_HTML.html">Inivtado</a>
-		<a href="public/html/11_GestionarListaIglesia_HTML.html">Visita</a><br><br>
-		<a href="public/html/6_GestionarListaPastor_HTML.html">Administrador</a>
+
+		<button command="show-modal" commandfor="dialogModalUsuario">Usuario</button>
+        <dialog id="dialogModalUsuario" closedby="any">
+        	<h3>Login Usuario</h3>
+	        <form method="POST" action="login_Infinix.php">
+				<input type="text" 		placeholder="Usuario" 		 name="nomUsrPOST" autofocus><br>
+				<input type="password" 	placeholder="Contraseña" 	 name="pasUsrPOST"><br>
+				<input type="button" 	id="cerrarModalUsuario" value="Cancelar">
+				<input type="submit" 	value="INGRESAR">
+			</form>    
+        </dialog>
+
+        <button command="show-modal" commandfor="dialogModalAdministrador">Administrador</button>
+        <dialog id="dialogModalAdministrador" closedby="any">
+        	<h3>Login Administrador</h3>
+	        <form method="POST" action="login_Infinix.php">
+				<input type="text" 		placeholder="Administrador"	name="nomAdmPOST" autofocus><br>
+				<input type="password" 	placeholder="Contraseña" 	name="pasAdmPOST"><br>
+				<input type="button" 	id="cerrarModalAdministrador" value="Cancelar">
+				<input type="submit" 	value="INGRESAR">
+			</form>    
+        </dialog>
+
+        <script>
+        	document.getElementById('cerrarModalUsuario').addEventListener('click',()=>{
+        	document.getElementById('dialogModalUsuario').close()})
+
+        	document.getElementById('cerrarModalAdministrador').addEventListener('click',()=>{
+        	document.getElementById('dialogModalAdministrador').close()})
+        </script>
+
 	</body>
 </html>
