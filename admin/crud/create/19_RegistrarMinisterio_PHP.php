@@ -31,6 +31,6 @@
     }
 
     mysqli_close($conexion);
-    header('location:../../../public/html/16_IglesiaMinistraPastor_HTML.html');
+    header('Location:../../../public/html/16_IglesiaMinistraPastor_HTML.html');
     exit;
 ?>

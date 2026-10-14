@@ -18,6 +18,6 @@
 	$consultaActualizar->execute();
 	$consultaActualizar->close();
 	mysqli_close($conexion);
-	header('location: ../../../public/html/11_GestionarListaIglesia_HTML.html');
+	header('Location: ../../../public/html/11_GestionarListaIglesia_HTML.html');
 	exit;
 ?>
