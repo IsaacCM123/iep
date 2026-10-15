@@ -9,7 +9,7 @@
     <dialog id="dialog" closedby="any">
         <h3>Actualizar Ministerio</h3>
 
-        <form method="POST" action="../../admin/crud/create/19_RegistrarMinisterio_PHP.php">
+        <form method="POST" action="../../admin/crud/create/19_ComponerMinisterio_PHP.php">
             <input type="text" name="idIglesiaPOST" id="idIglesiaID" readonly><br>
             <input type="text" id="nombreIglesia" readonly><br>
             <input type="text" id="ciudadID" readonly><br><br>
@@ -19,8 +19,8 @@
             <input type="text" id="nombrePastorID" readonly><br>
             <input type="text" id="categoriaID" readonly><br>
 
-            <p>¿Está seguro de Actualizar este Ministerio? Esta acción no se puede deshacer.</p>
-            <input type="button" id="cerrar" value="Cerrar">
+            <p>¿Está seguro de Actualizar este Ministerio?<br>Esta acción no se puede deshacer.</p>
+            <input type="button" id="cerrar" value="Cancelar">
             <input type="submit" value="Actualizar">
         </form><br><br>
         
@@ -30,7 +30,6 @@
         </table>
     </dialog>
 
-    
     <input type="text" id="buscarNombreIglesiaID" placeholder="Buscar Iglesia.."><br>
     
     <!--MODAL para gestionar Ministerio........................INICIO-->
@@ -50,8 +49,6 @@
         <tbody id="cuerpoTBL"></tbody>
     </table>
     <!--MODAL para gestionar Ministerio........................FINAL-->
-
-    
 
     <!--DIALOG - Buscar Pastor Para Ministrar.........................................INICIO-->
     <script>

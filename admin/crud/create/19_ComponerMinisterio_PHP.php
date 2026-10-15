@@ -29,8 +29,7 @@
             die("Error al guardar: " . $e->getMessage());
         }
     }
-
     mysqli_close($conexion);
-    header('Location:../../../public/html/16_IglesiaMinistraPastor_HTML.html');
+    header('Location:../../../public/html/16_PastorMinistraIglesia_HTML.html');
     exit;
 ?>
