@@ -6,13 +6,13 @@
 		<title></title>
 	</head>
 	<body>
-		<h3>Aplicacion Web De Gesion Corporativa</h3>
+		<h3>Aplicación Web De Gestión Corporativa</h3>
 
 		<button command="show-modal" commandfor="dialogModalOperario">Operario</button>
         <dialog id="dialogModalOperario" closedby="any">
         	<h3>Login Operario</h3>
 	        <form method="POST" action="admin/core/20_lock.php">
-				<input type="text" 		placeholder="Operario" 		name="nomOprPOST" autofocus><br>
+				<input type="text" 		placeholder="Operario" 		name="nomOprPOST" autocomplete="off" autofocus><br>
 				<input type="password" 	placeholder="Contraseña" 	name="pasOprPOST"><br>
 				<input type="button" 	id="cerrarModalOperario" 	value="Cancelar">
 				<input type="submit" 	value="INGRESAR">
@@ -23,22 +23,12 @@
         <dialog id="dialogModalAdministrador" closedby="any">
         	<h3>Login Administrador</h3>
 	        <form method="POST" action="admin/core/20_lock.php">
-				<input type="text" 		placeholder="Administrador"	name="nomAdmPOST" autofocus><br>
+				<input type="text" 		placeholder="Administrador"	name="nomAdmPOST" autocomplete="off" autofocus><br>
 				<input type="password" 	placeholder="Contraseña" 	name="pasAdmPOST"><br>
 				<input type="button" 	id="cerrarModalAdministrador" value="Cancelar">
 				<input type="submit" 	value="INGRESAR">
 			</form>    
-        </dialog>
-
-
-		<!--<h3>User main</h3>
-		<a href="public/html/2_BuscarRegistroPastor_HTML.html">Pastor</a>
-		<a href="#">Anfitrion</a>
-		<a href="public/html/16_IglesiaMinistraPastor_HTML.html">Inivtado</a>
-		<a href="public/html/11_GestionarListaIglesia_HTML.html">Visita</a><br><br>
-		<a href="public/html/6_GestionarListaPastor_HTML.html">Administrador</a>
-		-->
-        
+        </dialog>        
 
         <script>
         	document.getElementById('cerrarModalOperario').addEventListener('click',()=>{
