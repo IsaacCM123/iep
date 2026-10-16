@@ -14,23 +14,45 @@
     </head>
     <body>
         <!--Modal Para AGREGAR o REGISTRAR nueva Iglesia....................INICIO-->
-        <button command="show-modal" commandfor="dialog">Agregar Nueva Iglesia</button>
+        <button command="show-modal" commandfor="abrirModalDialogAgregarIglesia">Agregar Nueva Iglesia</button>
 
-        <dialog id="dialog" closedby="any">
-            <button id="cerrar">Cerrar...</button>
-            <h3>Agregar Iglesia</h3>
+        <dialog id="abrirModalDialogAgregarIglesia" closedby="any">
+            <button id="cerrarModalDialogAgregarIglesia">Cerrar Modal</button>
+            <h3>Agregar Nueva Iglesia</h3>
             <form method="POST" action="../../admin/crud/create/13_RegistrarNuevaIglesia_PHP.php">
-                <input type="text" name="IGLESIA_POST" placeholder="Nombre Iglesia.."><br>
-                <label>Ejm: CENTRAL TRINIDAD</label><br><br>
-                <input type="text" name="CIUDAD_POST" placeholder="Ciudad.."><br>
-                <label>Ejm: ORURO</label><br><br>
-                <input type="text" name="PAIS_POST" placeholder="Pais.."><br>
-                <label>Ejm: BOLIVIA</label><br><br>
-                <input type="text" name="ZONA_POST" placeholder="zona.."><br>
-                <label>Ejm: 5</label><br><br>
-                <p>¿Estás seguro de que deseas Registrar? Esta acción no se puede deshacer.</p>
+                <input type="text"name="IGLESIA_POST"placeholder="Nombre Iglesia.."autocomplete="off"autofocus><br>
+                <label>Ejm: CENTRAL YACUIBA (Mayúscula)</label><br><br>
+                <input placeholder="CIUDAD.."list="listaOpcionesCiudadID"name="CIUDAD_POST"autocomplete='off'>
+                <datalist id="listaOpcionesCiudadID">
+                    <option value="COCHABAMBA"></option>
+                    <option value="SANTA CRUZ"></option>
+                    <option value="LA PAZ"></option>
+                    <option value="ORURO"></option>
+                    <option value="BENI"></option>
+                    <option value="POTOSI"></option>
+                    <option value="TARIJA"></option>
+                    <option value="PANDO"></option>
+                    <option value="SUCRE"></option>
+                    <option value="VILLAZON"></option>
+                    <option value="ARICA"></option>
+                    <option value="IQUIQUE"></option>
+                    <option value="ANTOFAGASTA"></option>
+                    <option value="LIMA"></option>
+                </datalist><br>
+                <label>Ejm: TARIJA (Mayúscula)</label><br><br>
+                <input placeholder="PAIS.."list="listaOpcionesPaisID"name="PAIS_POST"autocomplete='off'>
+                <datalist id="listaOpcionesPaisID">
+                    <option value="BOLIVIA"></option>
+                    <option value="CHILE"></option>
+                    <option value="ARGENTINA"></option>
+                    <option value="PERU"></option>
+                </datalist><br>
+                <label>Ejm: BOLIVIA (Mayúscula)</label><br><br>
+                <input type="text"name="ZONA_POST"placeholder="ZONA.."autocomplete="off"><br>
+                <label>Ejm: 5 (Únicamente número)</label><br><br>
+                <p>¿Estás seguro de que deseas Registrar?<br>Esta acción no se puede deshacer.</p>
 
-                <input type="reset"value='Limpiar'>
+                <input type="reset"value='Reiniciar'>
                 <input type="submit"value='Registrar'>
             </form>
         </dialog>
@@ -42,11 +64,11 @@
             <h3>Actualizar Datos Iglesia</h3>
 
             <form method="POST" action="../../admin/crud/update/14_ActualizarRegistroIglesia_PHP.php">
-                <input type="text" name="idIglesiaUpdate_Post" id="idIglesiaUpdateID" readonly>
-                <input type="text" name="iglesiaUpdate_Post" id="iglesiaUpdateID" placeholder="IGLESIA..">
-                <input type="text" name="ciudadUpdate_Post" id="ciudadUpdateID" placeholder="CIUDAD..">
-                <input type="text" name="paisUpdate_Post" id="paisUpdateID" placeholder="PAIS..">
-                <input type="text" name="zonaUpdate_Post" id="zonaUpdateID" placeholder="ZONA..">
+                <input type="text" name="idIglesiaUpdate_Post" id="idIglesiaUpdateID" readonly><br>
+                <input type="text" name="iglesiaUpdate_Post" id="iglesiaUpdateID" placeholder="IGLESIA.."><br>
+                <input type="text" name="ciudadUpdate_Post" id="ciudadUpdateID" placeholder="CIUDAD.."><br>
+                <input type="text" name="paisUpdate_Post" id="paisUpdateID" placeholder="PAIS.."><br>
+                <input type="text" name="zonaUpdate_Post" id="zonaUpdateID" placeholder="ZONA.."><br>
 
                 <p>¿Está seguro de Actualizar este Registro? Esta acción no se puede deshacer.</p>
 
@@ -88,8 +110,8 @@
 
         <!--Solamente es cerrar Modal de Agregar, Actualizar, Eliminar................INICIO-->
         <script>
-            document.getElementById('cerrar').addEventListener('click',()=>{
-            document.getElementById('dialog').close()})
+            document.getElementById('cerrarModalDialogAgregarIglesia').addEventListener('click',()=>{
+            document.getElementById('abrirModalDialogAgregarIglesia').close()})
 
             document.getElementById('cerrarModal').addEventListener('click',()=>{
             document.getElementById('modalDialog').close()})
