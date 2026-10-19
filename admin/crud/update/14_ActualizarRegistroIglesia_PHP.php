@@ -1,11 +1,11 @@
 <?php
 	require __DIR__ . '/../../core/1_conexion.php';
 
-	$variableIde = $_POST['idIglesiaUpdate_Post'];
-	$variableIgl = $_POST['iglesiaUpdate_Post'];
-	$variableCiu = $_POST['ciudadUpdate_Post'];
-	$variablePai = $_POST['paisUpdate_Post'];
-	$variableZon = $_POST['zonaUpdate_Post'];
+	$variableIde = $_POST['ID_IGLESIA_UPDATE_POST'];
+	$variableIgl = $_POST['IGLESIA_UPDATE_POST'];
+	$variableCiu = $_POST['CIUDAD_UPDATE_POST'];
+	$variablePai = $_POST['PAIS_UPDATE_POST'];
+	$variableZon = $_POST['ZONA_UPDATE_POST'];
 
 	$consultaActualizar = $conexion->prepare(
 		"UPDATE tbl_iglesia

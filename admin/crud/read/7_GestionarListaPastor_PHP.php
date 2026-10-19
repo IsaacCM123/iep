@@ -1,6 +1,6 @@
 <?php
 require __DIR__ . '/../../core/1_conexion.php';
-$EjecutarConsulta = 'SELECT dniPastor,nombreCompleto,categoria,extra,telefono,FK_idMesa FROM tbl_pastor';
+$EjecutarConsulta = 'SELECT dniPastor,nombreCompleto,categoria,extra,telefono,FK_idMesa FROM tbl_pastor ORDER BY nombreCompleto ASC';
 
 //keyup para buscar nombre desde campo de texto nombrePOST ...................................
 $N_C = isset($_POST['ClaveNombrePost_QueryPHP']) ? $conexion->real_escape_string($_POST['ClaveNombrePost_QueryPHP']) : null;
@@ -15,7 +15,7 @@ $HTML='';
 if ($CargarValoresDeLaconsulta)
 {
 while($fila=mysqli_fetch_assoc($CargarValoresDeLaconsulta)){
-$HTML .="<tr onclick='obtenerDato(this)'>";
+$HTML .="<tr>";
 $HTML .="<td>".$fila['dniPastor']."</td>";
 $HTML .="<td>".$fila['nombreCompleto']."</td>";
 $HTML .="<td>".$fila['categoria']."</td>";
@@ -29,4 +29,5 @@ $HTML .="</tr>";}
 }
 mysqli_close($conexion);
 echo json_encode($HTML, JSON_UNESCAPED_UNICODE);
+exit;
 ?>

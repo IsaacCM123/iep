@@ -15,7 +15,7 @@ $resultado = mysqli_query($conexion,$peticionAlServidor);
 $HTML = "";
 if($resultado){
     while ($fila = mysqli_fetch_assoc($resultado)) {
-        $HTML .="<tr onclick='copiarDatos(this)'>";
+        $HTML .="<tr>";
         $HTML .="<td>".$fila['idIglesia']."</td>";
         $HTML .="<td>".$fila['nombreIglesia']."</td>";
         $HTML .="<td>".$fila['ciudad']."</td>";
@@ -27,4 +27,5 @@ if($resultado){
 }
 mysqli_close($conexion);
 echo json_encode($HTML, JSON_UNESCAPED_UNICODE);
+exit;
 ?>

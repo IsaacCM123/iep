@@ -16,5 +16,6 @@
     mysqli_stmt_close($stmt);
 }
 mysqli_close($conexion);
-header('location:../../../public/html/11_GestionarListaIglesia_HTML.html');
+header('Location:../../../public/html/11_GestionarListaIglesia_HTML.html');
+exit;
 ?>
