@@ -18,5 +18,6 @@
     mysqli_stmt_close($stmt);
 }
 mysqli_close($conexion);
-header('location:../../../public/html/6_GestionarListaPastor_HTML.html');
+header('Location:../../../public/html/6_GestionarListaPastor_HTML.html');
+exit;
 ?>

@@ -1,12 +1,12 @@
 <?php
 	require __DIR__ . '/../../core/1_conexion.php';
 
-	$variableDni = $_POST['dniUpdate_POST'];
-	$variableNom = $_POST['nombreUpdate_POST'];
-	$variableCat = $_POST['categoriaUpdate_POST'];
-	$variableExt = $_POST['extraUpdate_POST'];
-	$variableTel = $_POST['telefonoUpdate_POST'];
-	$variableMes = $_POST['mesaUpdate_POST'];
+	$variableDni = $_POST['DNI_PASTOR_UPDATE_POST'];
+	$variableNom = $_POST['NOMBRE_PASTOR_UPDATE_POST'];
+	$variableCat = $_POST['CATEGORIA_PASTOR_UPDATE_POST'];
+	$variableExt = $_POST['EXTRA_PASTOR_UPDATE_POST'];
+	$variableTel = $_POST['TELEFONO_PASTOR_UPDATE_POST'];
+	$variableMes = $_POST['MESA_PASTOR_UPDATE_POST'];
 
 	if ($variableMes===''){$variableMes = null;}
 
@@ -21,6 +21,6 @@
 	$consultaActualizar->execute();
 	$consultaActualizar->close();
 	mysqli_close($conexion);
-	header('location: ../../../public/html/6_GestionarListaPastor_HTML.html');
+	header('Location: ../../../public/html/6_GestionarListaPastor_HTML.html');
 	exit;
 ?>

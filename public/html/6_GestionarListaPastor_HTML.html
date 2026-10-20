@@ -23,7 +23,7 @@
                 <option value="PROBANDO">PROBANDO</option>
                 <option value="HONORARIO">HONORARIO</option>
                 <option value="AYUDANTE">AYUDANTE</option>
-                <option value="AYUDANTE">OTROS</option>
+                <option value="OTROS">OTROS</option>
             </select><br>
             <label>Ejm: PROBANDO (Mayúscula)</label><br><br>
             <input list="listaOpcionesExtraID"name="EXTRA_POST"placeholder="EXTRA.."autocomplete="off">
@@ -82,38 +82,38 @@
     <!--Modal para agregar nuevo pastor ....................FINAL-->
 
 
-    <!--Editar o Actualizar registro..................INICIO-->
-    <dialog id="modalDialogActualizar" closedby="any">
-        <div class="contenido">
-            <form method="POST" action="../../admin/crud/update/10_ActualizarRegistroPastor_PHP.php">
-
-                <input type="text" id="campoDni" name="dniUpdate_POST" readonly><br>
-                <input type="text" id="campoNombre" name="nombreUpdate_POST"><br>
-
-                <select id="campoCategoria" name="categoriaUpdate_POST">
-                    <option value="">CATEGORIA</option>
-                    <option value="PRESBITERO">PRESBITERO</option>
-                    <option value="DIACONO">DIACONO</option>
-                    <option value="PROBANDO">PROBANDO</option>
-                    <option value="HONORARIO">HONORARIO</option>
-                    <option value="AYUDANTE">AYUDANTE</option>
-                </select><br>
-
-                <input type="text" id="campoExtra" list="listaExtra" name="extraUpdate_POST">
-                <datalist id="listaExtra">
-                    <option value="ENCARGADO DE OBRA">Requisito Opcional.</option>
-                    <option value="SUPERINTENDENTE">Requisito Opcional.</option>
-                    <option value="JEFE DE ZONA">Requisito Opcional.</option>
-                    <option value="PRESIDENTE">Requisito Opcional.</option>
-                    <option value="ANFITRION">Requisito Opcional.</option>
-                    <option value="TESORERO">Requisito Opcional.</option>
-                    <option value="VOCAL">Requisito Opcional.</option>
-                </datalist><br>
-
-                <input type="text" id="campoTelefono" name="telefonoUpdate_POST"><br>
-
-                <input placeholder="ASIGNAR MESA.." type="text" id="campoMesa" list="Mesa" name="mesaUpdate_POST">
-                <datalist id="Mesa">
+    <!--Modal Dialog Para Actualizar Registro Del Pastor.............................................INICIO-->
+    <dialog id='abrirModalDialogActualizarRegistroPastor'closedby='any'>
+        <h3>Actualizar Registro De Este Pastor</h3>
+        <form method="POST"action="../../admin/crud/update/10_ActualizarRegistroPastor_PHP.php">
+            <input type="text"id="txtDniPastorUpdateID"name="DNI_PASTOR_UPDATE_POST"readonly><br><br>
+            <input type="text"id="txtNombrePastorUpdateID"name="NOMBRE_PASTOR_UPDATE_POST"placeholder="NOMBRE.."autocomplete="off"><br>
+            <label>Ejm: ALEJANDRO GUTIERREZ FUENTES (Mayúscula)</label><br><br>
+            <select id="txtCategoriaPastorUpdateID"name="CATEGORIA_PASTOR_UPDATE_POST">
+                <option value="">CATEGORIA..</option>
+                <option value="PRESBITERO">PRESBITERO</option>
+                <option value="DIACONO">DIACONO</option>
+                <option value="PROBANDO">PROBANDO</option>
+                <option value="HONORARIO">HONORARIO</option>
+                <option value="AYUDANTE">AYUDANTE</option>
+                <option value="OTROS">OTROS</option>
+            </select><br>
+            <label>Ejm: PROBANDO (Mayúscula)</label><br><br>
+            <input list="listaOpcionesExtraPastorUpdateID"id="dtlExtraPastorUpdateID"name="EXTRA_PASTOR_UPDATE_POST"placeholder="EXTRA.."autocomplete="off">
+            <datalist id="listaOpcionesExtraPastorUpdateID">
+                <option value="ENCARGADO DE OBRA">Requisito Opcional.</option>
+                <option value="SUPERINTENDENTE">Requisito Opcional.</option>
+                <option value="JEFE DE ZONA">Requisito Opcional.</option>
+                <option value="PRESIDENTE">Requisito Opcional.</option>
+                <option value="ANFITRION">Requisito Opcional.</option>
+                <option value="TESORERO">Requisito Opcional.</option>
+                <option value="VOCAL">Requisito Opcional.</option>
+            </datalist><br>
+            <label>Opcional - Campo No Obligatorio!</label><br><br>
+            <input type="text"id="txtTelefonoPastorUpdateID"name="TELEFONO_PASTOR_UPDATE_POST"placeholder="TELEFONO.."autocomplete="off"><br>
+            <label>Ejm: +591 78325086 - Modelo Opcional!</label><br><br>
+            <input list="listaOpcionesMesaPastorID"id="dtlMesaPastorUpdateID"name="MESA_PASTOR_UPDATE_POST"placeholder="ASIGNAR MESA.."autocomplete="off">
+                <datalist id="listaOpcionesMesaPastorID">
                     <option value="Mesa-001">MOISÉS</option>
                     <option value="Mesa-002">PABLO</option>
                     <option value="Mesa-003">ABRAHAM</option>
@@ -145,42 +145,43 @@
                     <option value="Mesa-029">NAHUM</option>
                     <option value="Mesa-030">JESÚS</option>
                 </datalist><br>
-
-                <input type="button" id="btnCerrarModalActualizar" value="Cancelar">
-                <input type="submit" name="">
+                <label>Ejm: Mesa-009 - Campo No Obligatorio!</label><br><br>
+                <small>¿Está Seguro De Actualizar Este Registro?<br>Esta Acción No Se Puede Deshacer.</small><br><br>
+                <input type="button"id="btnCerrarModalDialogActualizarPastor"value="Cancelar">
+                <input type="submit"value="Actualizar">
             </form>
-        </div>
     </dialog>
-    <!--Editar o Actualizar registro..................FINAL-->
+    <!--Modal Dialog Para Actualizar Registro Del Pastor..................................................FINAL-->
 
 
-    <!--Nuevo DIALOG para ELIMINAR registro pastor ........................INICIO-->
-    <dialog id="modalConfirmarEliminar" closedby='any'>
-        <h3>Eliminar Permanentemente Este Registro.</h3>
-        <form method="POST" action="../../admin/crud/delete/9_EliminarPastor.php">
-            <input type="text" id="txtDniPastorEliminarID" name="dniParaPhpEliminarPastor_POST" readonly><br>
-            <input type="text" id="txtNombrePastorEliminarID" readonly><br>
-            <input type="text" id="txtCategoriaPastorEliminarID" readonly><br><br>
-            <p>¿Realmente quieres Eliminar este Registro?<br>Esta acción no se puede deshacer.</p>
-            <input type="button" id="btnCerrarModalEliminar" value="Cancelar">
-            <input type="submit" value="Eliminar">
+    <!--Modal Dialog Para Eliminar Registro Del Pastor....................................................INICIO-->
+    <dialog id="abrirModalDialogEliminarRegistroPastor"closedby='any'>
+        <h3>Eliminar Registro De Este Pastor.</h3>
+        <form method="POST"action="../../admin/crud/delete/9_EliminarRegistroPastor_PHP.php">
+            <input type="text"id="txtDniPastorEliminarID"name="DNI_PASTOR_DELETE_POST"readonly><br><br>
+            <input type="text"id="txtNombrePastorEliminarID"readonly><br><br>
+            <input type="text"id="txtCategoriaPastorEliminarID"readonly><br><br>
+            <input type="text"id="txtExtraPastorEliminarID"readonly><br><br>
+            <input type="text"id="txtTelefonoPastorEliminarID"readonly><br><br>
+            <small>¿Está Seguro de Eliminar Este Registro?<br>Esta Acción No Se Puede Deshacer.</small><br><br>
+            <input type="button"id="btnCerrarModalDialogEliminarPastor"value="Cancelar">
+            <input type="submit"value="Eliminar">
         </form>
     </dialog>
-    <!--Nuevo DIALOG para ELIMINAR registro pastor ........................FINAL-->
+    <!--Modal Dialog Para Eliminar Registro Del Pastor....................................................FINAL-->
 
 
-    <!--Panel Principal (BUSCAR PASTOR PARA CONSTRUIR MINISTERIO-DELEGACION.......INICIO-->
-    <input type="text"id="nombreID"placeholder="Nombre Pastor..."autocomplete="off"autofocus><br><br>
+    <!--Panel Principal Descargamos todos los registros de la TBL_Pastor.............................INICIO-->
+    <input type="text"id="nombrePastorID"placeholder="Nombre Pastor..."autocomplete="off"autofocus><br><br>
     <table>
-        <thead>
-        <tr><th>Dni</th><th>Nombre</th><th>Categoria</th><th>Extra</th><th>Telefono</th><th>Mesa</th><th>Actualizar</th><th>Baja</th><th>Eliminar</th></tr>
-        </thead>
-        <tbody id="cuerpoTBL"></tbody>
+    <thead>
+    <tr>
+    <th>Dni</th><th>Nombre</th><th>Categoria</th><th>Extra</th><th>Telefono</th><th>Mesa</th><th>Actualizar</th><th>Baja</th><th>Eliminar</th><th>Comité</th>
+    </tr>
+    </thead>
+    <tbody id="cuerpoTBL"></tbody>
     </table>
-    <!--Panel Principal (BUSCAR PASTOR PARA CONSTRUIR MINISTERIO-DELEGACION.........FINAL-->
-
-
-
+    <!--Panel Principal Descargamos todos los registros de la TBL_Pastor................................FINAL-->
 
 
     <!--Solamente es cerrar Modal de Agregar, Actualizar, Eliminar......................................INICIO-->
@@ -188,11 +189,11 @@
         document.getElementById('btnCerrarModalDialogAgregarPastor').addEventListener('click',()=>{
         document.getElementById('abrirModalDialogAgregarPastor').close()})
 
-        document.getElementById('btnCerrarModalEliminar').addEventListener('click',()=>{
-        document.getElementById('modalConfirmarEliminar').close()})
+        document.getElementById('btnCerrarModalDialogActualizarPastor').addEventListener('click',()=>{
+        document.getElementById('abrirModalDialogActualizarRegistroPastor').close()})
 
-        document.getElementById('btnCerrarModalActualizar').addEventListener('click',()=>{
-        document.getElementById('modalDialogActualizar').close()})
+        document.getElementById('btnCerrarModalDialogEliminarPastor').addEventListener('click',()=>{
+        document.getElementById('abrirModalDialogEliminarRegistroPastor').close()})
     </script>
     <!--Solamente es cerrar Modal de Agregar, Actualizar, Eliminar........................................FINAL-->
 
@@ -200,41 +201,38 @@
     <!--Cargamos el registro de todos los pastores.......................................................INICIO-->
     <script>
         conseguirDatos()
-        document.getElementById('nombreID').addEventListener('keyup',conseguirDatos)
+        document.getElementById('nombrePastorID').addEventListener('keyup',conseguirDatos)
         function conseguirDatos(){
-            const datoFormateado = new FormData()
-            datoFormateado.append('ClaveNombrePost_QueryPHP',document.getElementById('nombreID').value)
+            const datoFormateado=new FormData()
+            datoFormateado.append('ClaveNombrePost_QueryPHP',document.getElementById('nombrePastorID').value)
 
             fetch('../../admin/crud/read/7_GestionarListaPastor_PHP.php',{method:'POST',body:datoFormateado})
             .then(response=>response.json())
             .then(valoresDePHP=>{
-                document.getElementById('cuerpoTBL').innerHTML = valoresDePHP
-            })    
+                document.getElementById('cuerpoTBL').innerHTML=valoresDePHP})    
         }
     </script>
     <!--Cargamos el registro de todos los pastores............................................................FINAL-->
 
 
-    <!--Editar o Actualizar registro...........INICIO-->
+    <!--Editar o Actualizar registro Pastor.....................................INICIO-->
     <script>
         document.getElementById('cuerpoTBL').addEventListener('click', function(e) {
-            // Verifica que el click haya sido en el ícono o en la celda "actualizar"
-            const celdaActualizar = e.target.closest('.editarRegistro')
+            const celdaActualizar = e.target.closest('.editarRegistroPastor')// Verifica que el click haya sido en el ícono o en la celda "actualizar"
             if (!celdaActualizar) return // si el click fue en otra parte de la fila, no hace nada
 
             const fila = celdaActualizar.closest('tr') // obtiene la fila completa
 
-            document.getElementById('campoDni').value       = fila.cells[0].innerHTML
-            document.getElementById('campoNombre').value     = fila.cells[1].innerHTML
-            document.getElementById('campoCategoria').value  = fila.cells[2].innerHTML
-            document.getElementById('campoExtra').value      = fila.cells[3].innerHTML
-            document.getElementById('campoTelefono').value   = fila.cells[4].innerHTML
-            document.getElementById('campoMesa').value       = fila.cells[5].innerHTML
+            document.getElementById('txtDniPastorUpdateID').value       = fila.cells[0].innerHTML
+            document.getElementById('txtNombrePastorUpdateID').value     = fila.cells[1].innerHTML
+            document.getElementById('txtCategoriaPastorUpdateID').value  = fila.cells[2].innerHTML
+            document.getElementById('dtlExtraPastorUpdateID').value      = fila.cells[3].innerHTML
+            document.getElementById('txtTelefonoPastorUpdateID').value   = fila.cells[4].innerHTML
+            document.getElementById('dtlMesaPastorUpdateID').value       = fila.cells[5].innerHTML
 
-            modalDialogActualizar.showModal()
-        })
+            abrirModalDialogActualizarRegistroPastor.showModal()})
     </script>
-    <!--Editar o Actualizar registro............FINAL-->
+    <!--Editar o Actualizar registro Pastor......................................FINAL-->
 
 
     <!--Eliminar registro con confirmacion ........................INICIO-->
@@ -246,12 +244,12 @@
             document.getElementById('txtDniPastorEliminarID').value=clickFilaEliminar.cells[0].innerHTML
             document.getElementById('txtNombrePastorEliminarID').value=clickFilaEliminar.cells[1].innerHTML
             document.getElementById('txtCategoriaPastorEliminarID').value=clickFilaEliminar.cells[2].innerHTML
+            document.getElementById('txtExtraPastorEliminarID').value=clickFilaEliminar.cells[3].innerHTML
+            document.getElementById('txtTelefonoPastorEliminarID').value=clickFilaEliminar.cells[4].innerHTML
 
-            modalConfirmarEliminar.showModal()
-        })
+            abrirModalDialogEliminarRegistroPastor.showModal()})
     </script>
     <!--Eliminar registro con confirmacion ........................FINAL-->
-
 
     <script type="module"src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.esm.js"></script>
 </body>
