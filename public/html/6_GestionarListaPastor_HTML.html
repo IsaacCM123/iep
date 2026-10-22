@@ -6,7 +6,7 @@
     <title></title>
 </head>
 <body>
-    <!--Modal Para Agregar o Registrar Nuevo Pastor.........................................INICIO-->
+    <!--Modal Para Agregar o Registrar Nuevo Pastor...............................................INICIO-->
     <button command='show-modal'commandfor='abrirModalDialogAgregarPastor'>Agregar Nuevo Pastor</button>
     <dialog id='abrirModalDialogAgregarPastor'closedby="any">
         <button id='btnCerrarModalDialogAgregarPastor'>Cerrar este Modal</button>
@@ -39,7 +39,6 @@
             <label>Opcional - Campo No Obligatorio!</label><br><br>
             <input type="text"name="TEL_POST"placeholder="TELEFONO.."autocomplete="off"><br>
             <label>Ejm: +591 78325086 - Modelo Opcional!</label><br><br>
-
             <input list="listaOpcionesMesaID"name="MESA_POST"placeholder="ASIGNAR MESA.."autocomplete="off">
             <datalist id="listaOpcionesMesaID">
                 <option value="Mesa-001">MOISÉS</option>
@@ -79,8 +78,7 @@
             <input type="submit"value="Agregar">
         </form>
     </dialog>
-    <!--Modal para agregar nuevo pastor ....................FINAL-->
-
+    <!--Modal Para Agregar o Registrar Nuevo Pastor ..................................................FINAL-->
 
     <!--Modal Dialog Para Actualizar Registro Del Pastor.............................................INICIO-->
     <dialog id='abrirModalDialogActualizarRegistroPastor'closedby='any'>
@@ -153,7 +151,6 @@
     </dialog>
     <!--Modal Dialog Para Actualizar Registro Del Pastor..................................................FINAL-->
 
-
     <!--Modal Dialog Para Eliminar Registro Del Pastor....................................................INICIO-->
     <dialog id="abrirModalDialogEliminarRegistroPastor"closedby='any'>
         <h3>Eliminar Registro De Este Pastor.</h3>
@@ -170,19 +167,32 @@
     </dialog>
     <!--Modal Dialog Para Eliminar Registro Del Pastor....................................................FINAL-->
 
+    <!--Modal Dialog Del Pastor Seleccionado Para Dirigirnos Hacia Contenido-Delegacion....................INICIO-->
+    <dialog id="abrirModalDialogIrADelegacionPastor"closedby='any'>
+        <h3>Construir Delegación De Este Pastor:</h3>
+        <form method="GET"action="23_ConstruirDelegacionDePastorAdm_HTML.html">
+            <input type="text"id="txtDniPastorDelegacionID"name="DNI_PASTOR_DELEGACION_GET"readonly><br><br>
+            <input type="text"id="txtNombrePastorDelegacionID"readonly><br><br>
+            <input type="text"id="txtCategoriaPastorDelegacionID"readonly><br><br>
+            <input type="text"id="txtTelefonoPastorDelegacionID"readonly><br><br>
+            <small>¿Está Seguro de Dirigirse a la Página de Delegación?<br>Grupo de Representantes De Una Iglesia.</small><br><br>
+            <input type="button" id="btnCerrarModalDialogIrADelegacionPastor"value="Cancelar">
+            <input type="submit"value="Dirigirnos">
+        </form>
+    </dialog>
+    <!--Modal Dialog Del Pastor Seleccionado Para Dirigirnos Hacia Contenido-Delegacion.....................FINAL-->
 
     <!--Panel Principal Descargamos todos los registros de la TBL_Pastor.............................INICIO-->
     <input type="text"id="nombrePastorID"placeholder="Nombre Pastor..."autocomplete="off"autofocus><br><br>
     <table>
     <thead>
     <tr>
-    <th>Dni</th><th>Nombre</th><th>Categoria</th><th>Extra</th><th>Telefono</th><th>Mesa</th><th>Actualizar</th><th>Baja</th><th>Eliminar</th><th>Comité</th>
+    <th>Dni</th><th>Nombre</th><th>Categoria</th><th>Extra</th><th>Telefono</th><th>Mesa</th><th>Actualizar</th><th>Eliminar</th><th>Comité</th>
     </tr>
     </thead>
     <tbody id="cuerpoTBL"></tbody>
     </table>
     <!--Panel Principal Descargamos todos los registros de la TBL_Pastor................................FINAL-->
-
 
     <!--Solamente es cerrar Modal de Agregar, Actualizar, Eliminar......................................INICIO-->
     <script>
@@ -194,11 +204,13 @@
 
         document.getElementById('btnCerrarModalDialogEliminarPastor').addEventListener('click',()=>{
         document.getElementById('abrirModalDialogEliminarRegistroPastor').close()})
+
+        document.getElementById('btnCerrarModalDialogIrADelegacionPastor').addEventListener('click',()=>{
+        document.getElementById('abrirModalDialogIrADelegacionPastor').close()})
     </script>
     <!--Solamente es cerrar Modal de Agregar, Actualizar, Eliminar........................................FINAL-->
 
-
-    <!--Cargamos el registro de todos los pastores.......................................................INICIO-->
+    <!--Cargar el registro de todos los pastores.......................................................INICIO-->
     <script>
         conseguirDatos()
         document.getElementById('nombrePastorID').addEventListener('keyup',conseguirDatos)
@@ -212,8 +224,7 @@
                 document.getElementById('cuerpoTBL').innerHTML=valoresDePHP})    
         }
     </script>
-    <!--Cargamos el registro de todos los pastores............................................................FINAL-->
-
+    <!--Cargar el registro de todos los pastores............................................................FINAL-->
 
     <!--Editar o Actualizar registro Pastor.....................................INICIO-->
     <script>
@@ -234,8 +245,7 @@
     </script>
     <!--Editar o Actualizar registro Pastor......................................FINAL-->
 
-
-    <!--Eliminar registro con confirmacion ........................INICIO-->
+    <!--Eliminar registro de Este Pastor....................................................INICIO-->
     <script>
         document.getElementById('cuerpoTBL').addEventListener('click',(e)=>{
             const iconoEliminarRegistroPastor=e.target.closest('.eliminarRegistroPastor')
@@ -249,7 +259,24 @@
 
             abrirModalDialogEliminarRegistroPastor.showModal()})
     </script>
-    <!--Eliminar registro con confirmacion ........................FINAL-->
+    <!--Eliminar registro de Este Pastor....................................................FINAL-->
+
+    <!--Modal Dialog Del Pastor Seleccionado Para Dirigirnos Hacia Contenido-Delegacion....................INICIO-->
+    <script>
+        document.getElementById('cuerpoTBL').addEventListener('click',function(e){
+            const iconoComiteDelPastorSeleccionado=e.target.closest('.verDelegacionDeEstePastor')
+            if (!iconoComiteDelPastorSeleccionado) return
+
+            const clickFilaDatosPastor=iconoComiteDelPastorSeleccionado.closest('tr')
+
+            document.getElementById('txtDniPastorDelegacionID').value       = clickFilaDatosPastor.cells[0].innerHTML
+            document.getElementById('txtNombrePastorDelegacionID').value     = clickFilaDatosPastor.cells[1].innerHTML
+            document.getElementById('txtCategoriaPastorDelegacionID').value  = clickFilaDatosPastor.cells[2].innerHTML
+            document.getElementById('txtTelefonoPastorDelegacionID').value      = clickFilaDatosPastor.cells[4].innerHTML
+
+            abrirModalDialogIrADelegacionPastor.showModal()})
+    </script>
+    <!--Modal Dialog Del Pastor Seleccionado Para Dirigirnos Hacia Contenido-Delegacion......................FINAL-->
 
     <script type="module"src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.esm.js"></script>
 </body>

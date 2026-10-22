@@ -17,7 +17,7 @@
             <input type="text" id="categoriaMinistroID" readonly><br>
             <input type="text" id="extraMinistroID" readonly><br>
             <input type="text" id="telefonoMinistroID" readonly><br>
-            <p>¿Deseas Dirigirte a Delegacion?.<br>[Grupo de Representantes de una Iglesia]</p>
+            <small>¿Deseas Dirigirte a Delegacion?.<br>Grupo de Representantes De Una Iglesia.</small>
             <input type="button" id="cancelarID" value="cancelar">
             <input type="submit" value="Delegacion">
         </form>    
@@ -27,14 +27,14 @@
 		<thead>
             <tr><th>D.n.i.</th><th>Nombre Ministro</th><th>Categoria</th><th>Extra</th><th>Telefono</th></tr>
         </thead>
-		<tbody id="cuerpo"><!--Aqui se insertara la lista de pastores con .JSON--></tbody>
+		<tbody id="cuerpo"></tbody>
 	</table>
 
 	<script>
         function obtenerValoresDeLaFilaClickeada(fila){
             document.getElementById('dniMinistroID').value      = fila.cells[0].innerHTML
             document.getElementById('buscarMinistroID').value   = fila.cells[1].innerHTML
-            document.getElementById('nombreMinistroID').value   = fila.cells[1].innerHTML
+            document.getElementById('nombreMinistroID').value   = fila.cells[1].innerHTML// Esta bien !
             document.getElementById('categoriaMinistroID').value= fila.cells[2].innerHTML
             document.getElementById('extraMinistroID').value    = fila.cells[3].innerHTML
             document.getElementById('telefonoMinistroID').value = fila.cells[4].innerHTML

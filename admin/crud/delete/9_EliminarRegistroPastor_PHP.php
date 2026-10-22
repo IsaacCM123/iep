@@ -5,12 +5,9 @@
 
 	$consultaEliminar=$conexion->prepare("DELETE FROM tbl_pastor WHERE dniPastor=?");
 	$consultaEliminar->bind_param('s',$dniCopia);
-	
 	$consultaEliminar->execute();
-
 	$consultaEliminar->close();
 	mysqli_close($conexion);
-
 	header('Location: ../../../public/html/6_GestionarListaPastor_HTML.html');
 	exit;
 ?>

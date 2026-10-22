@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+</head>
+<body>
+    <h1>Construir Delegación De Este Pastor:</h1><br>
+
+    <fieldset>
+        <legend>Datos Del Pastor - Presidente De La Delegación.</legend>
+        <input type="text"id="txtDniPastorArmarDelegacionID"readonly><br>
+        <input type="text"id="txtNombrePastorArmarDelegacionID"readonly><br>
+        <input type="text"id="txtCategoriaPastorArmarDelegacionID"readonly><br>
+        <input type="text"id="txtExtraPastorArmarDelegacionID"readonly><br>
+        <input type="text"id="txtTelefonoPastorArmarDelegacionID"readonly><br>
+        <input type="text"id="txtNombreIglesiaArmarDelegacionID"readonly><br>
+        <input type="text"id="txtCiudadIglesiaArmarDelegacionID"readonly><br>
+        <input type="text"id="txtPaisIglesiaArmarDelegacionID"readonly><br>
+        <input type="text"id="txtNombreAnfitrionArmarDelegacionID"readonly><br>
+        <input type="text"id="txtCelularAnfitrionArmarDelegacionID"readonly><br>
+        <input type="text"id="txtMesaAsignadaArmarDelegacionID"readonly><br>
+    </fieldset>
+
+    <fieldset>
+        <legend>Datos De los Delegados - Brazo Derecho Del Pastor.</legend>
+        <table>
+            <thead>
+                <tr><th>Nombre Delegado</th><th>Cédula Identidad</th><th>Mesa Asignada</th></tr>
+            </thead>
+            <tbody id="DescargarAquiLosDatosDelDelegadoTblBody">
+                <!--Los Registros De La consulta Se Descargan Aqui!-->
+            </tbody>
+        </table>
+    </fieldset>
+
+    <fieldset>
+        <legend>Datos De La Esposa - Tiara Del Pastor.</legend>
+        <input type="text" id="txtNombreDeLaEsposaDelPastorID"readonly>
+    </fieldset>
+
+    <fieldset>
+        <legend>Datos De Los Hijos - Acompañantes Del Pastor.</legend>
+        <table>
+            <thead>
+                <tr><th>nombre Hijo</th><th>Mesa Asignada</th></tr>
+            </thead>
+            <tbody id="DescargarAquiLosDatosDelHijoTblBody">
+                <!--Los Registros De La Consulta Se Descargan Aqui-->
+            </tbody>
+        </table>
+    </fieldset>
+
+
+
+    <!--If no tiene mesa asignada icono de asignar mesa... if no tiene hospedaje icono de asignar hospedaje... igualmente con las mesas de la esposa, hijo, delegado....-->
+
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded',()=>{
+            const capturarElValorDeLaURL = new URLSearchParams(window.location.search)
+            const dniValor = capturarElValorDeLaURL.get('DNI_PASTOR_DELEGACION_GET') // Cambiar estos Nombres Muy indefinidos...
+
+            const datoDelCampoTxtClaveValor=new FormData()
+            datoDelCampoTxtClaveValor.append('dniPastorEnviarPhp_POST',dniValor) // Cambiar estos Nombres Muy indefinidos...
+
+            fetch('../../admin/crud/read/24_AdministrarDelegacionDeEstePastor_PHP.php', {method:'POST', body:datoDelCampoTxtClaveValor})
+            .then(response => response.json())
+            .then(valoresDePHP => {
+
+                document.getElementById('txtDniPastorArmarDelegacionID').value       = valoresDePHP.dni
+                document.getElementById('txtNombrePastorArmarDelegacionID').value    = valoresDePHP.nombre
+                document.getElementById('txtCategoriaPastorArmarDelegacionID').value = valoresDePHP.categoria
+                document.getElementById('txtExtraPastorArmarDelegacionID').value     = valoresDePHP.extra
+                document.getElementById('txtTelefonoPastorArmarDelegacionID').value  = valoresDePHP.telefono
+                document.getElementById('txtNombreIglesiaArmarDelegacionID').value   = valoresDePHP.iglesia
+                document.getElementById('txtCiudadIglesiaArmarDelegacionID').value   = valoresDePHP.ciudad
+                document.getElementById('txtPaisIglesiaArmarDelegacionID').value     = valoresDePHP.pais
+                document.getElementById('txtNombreAnfitrionArmarDelegacionID').value = valoresDePHP.anfitrion
+                document.getElementById('txtCelularAnfitrionArmarDelegacionID').value= valoresDePHP.celular
+                document.getElementById('txtMesaAsignadaArmarDelegacionID').value    = valoresDePHP.mesa
+
+                document.getElementById('txtNombreDeLaEsposaDelPastorID').value      = valoresDePHP.esposa
+
+                // ------------------------- Delegados -------------------------
+                let filasDelegados = ''
+                valoresDePHP.delegadosArray.forEach(d=>{
+                    filasDelegados += `<tr>
+                        <td>${d.nombre}</td>
+                        <td>${d.cedula}</td>
+                        <td>${d.mesa}</td>
+                    </tr>`
+                })
+                document.getElementById('DescargarAquiLosDatosDelDelegadoTblBody').innerHTML = filasDelegados
+
+                // ------------------------- Hijos -------------------------
+                let filasHijos = ''
+                valoresDePHP.hijosArray.forEach(h=>{
+                    filasHijos += `<tr>
+                        <td>${h.nombre}</td>
+                        <td>${h.mesa}</td>
+                    </tr>`
+                })
+                document.getElementById('DescargarAquiLosDatosDelHijoTblBody').innerHTML = filasHijos
+            })
+        })
+    </script>
+</body>
+</html>

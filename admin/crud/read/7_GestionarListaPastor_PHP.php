@@ -23,7 +23,6 @@ $HTML .="<td>".$fila['extra']."</td>";
 $HTML .="<td>".$fila['telefono']."</td>";
 $HTML .="<td>".$fila['FK_idMesa']."</td>";
 $HTML .="<td class='editarRegistroPastor'><ion-icon name='reader-sharp'></ion-icon></td>";
-$HTML .="<td class='darDeBajaEstePastor'><ion-icon name='remove-circle-sharp'></ion-icon></td>";
 $HTML .="<td class='eliminarRegistroPastor'><ion-icon name='trash-sharp'></ion-icon></td>";
 $HTML .="<td class='verDelegacionDeEstePastor'><ion-icon name='people-sharp'></ion-icon></td>";
 $HTML .="</tr>";}
