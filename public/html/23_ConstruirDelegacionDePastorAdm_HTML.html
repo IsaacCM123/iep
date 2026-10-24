@@ -18,13 +18,19 @@
         <input type="text"id="txtNombreIglesiaArmarDelegacionID"readonly><br>
         <input type="text"id="txtCiudadIglesiaArmarDelegacionID"readonly><br>
         <input type="text"id="txtPaisIglesiaArmarDelegacionID"readonly><br>
-        <input type="text"id="txtNombreAnfitrionArmarDelegacionID"readonly><br>
+        <input type="text"id="txtNombreAnfitrionArmarDelegacionID"readonly><!--Campo de texto Nombre Del Anfitrion, Si el Campo esta vacio showModalDialog-->
+        <button command='show-modal'commandfor='abrirModalDialogAsignarHospedajePastor'id='btnAsignarHospedajePastorID'>
+            <ion-icon name="home-sharp"></ion-icon>
+        </button><br>
         <input type="text"id="txtCelularAnfitrionArmarDelegacionID"readonly><br>
-        <input type="text"id="txtMesaAsignadaArmarDelegacionID"readonly><br>
+        <input type="text"id="txtMesaAsignadaArmarDelegacionID"readonly><!--Campo de texto Mesa, Si el Campo esta vacio Asignar Mesa con: showModalDialog-->
+        <button id='btnAsignarMesaPastorID'>
+            <ion-icon  name="restaurant-sharp"></ion-icon>
+        </button><br>
     </fieldset>
 
     <fieldset>
-        <legend>Datos De los Delegados - Brazo Derecho Del Pastor.</legend>
+        <legend>Datos De los Delegados - VicePresidentes De La Delegación.</legend>
         <table>
             <thead>
                 <tr><th>Nombre Delegado</th><th>Cédula Identidad</th><th>Mesa Asignada</th></tr>
@@ -36,7 +42,7 @@
     </fieldset>
 
     <fieldset>
-        <legend>Datos De La Esposa - Tiara Del Pastor.</legend>
+        <legend>Datos De La Esposa - Brazo Derecho Del Pastor.</legend>
         <input type="text" id="txtNombreDeLaEsposaDelPastorID"readonly>
     </fieldset>
 
@@ -52,20 +58,41 @@
         </table>
     </fieldset>
 
+    <!--Modal Dialog Que Construye Hospedaje Pastor - Anfitrion..............................................................INICIO-->
+    <dialog id="abrirModalDialogAsignarHospedajePastor"closedby='any'>
+        <h3>Asignar Hospedaje A Pastor:</h3>
+        <form method="POST" action="../../admin/crud/create/26_RegistrarHospedajePastorAnfitrion_PHP.php">
+            <input type="text"id="txtDniPastorConstruirHospedajeCopiaID"name="DNI_PASTOR_POST"readonly><br>
+            <input type="text"id="txtNombrePastorConstruirHospedajeCopiaID"readonly><br>
+            <input type="text"id="txtCategoriaPastorConstruirHospedajeCopiaID"readonly><br>
+            <h3>Con El Hno. Anfitrion:</h3>
+            <input type="text"id="txtIdAnfitrionHospederoID"name="ID_ANFITRION_POST"readonly><br>
+            <input type="text"id="txtBuscarNombreAnfitrionHospederoID"placeholder="NOMBRE ANFITRION..."autocomplete="OFF"autofocus><br>
+            <input type="button" id="btnCerrarModalDialogConstruirHospedajeID" value="Cancelar">
+            <input type="submit" value="Guardar"><br>
+            <table>
+                <thead><tr><th>ID</th><th>Anfitrión</th></tr></thead>
+                <tbody id="tblCargarRegistrosDeTodosLosAnfitrionesID"></tbody>
+            </table>
+        </form>
+    </dialog>
+    <!--Modal Dialog Que Construye Hospedaje Pastor - Anfitrion................................................................FINAL-->
 
 
-    <!--If no tiene mesa asignada icono de asignar mesa... if no tiene hospedaje icono de asignar hospedaje... igualmente con las mesas de la esposa, hijo, delegado....-->
-
-
-
+    <!--Solamente es cerrar Modal Dialog Para Construir Delegacion.......................................INICIO-->
+    <script>
+        document.getElementById('btnCerrarModalDialogConstruirHospedajeID').addEventListener('click',()=>{
+        document.getElementById('abrirModalDialogAsignarHospedajePastor').close()})
+    </script>
+    <!--Solamente es cerrar Modal Dialog Para Construir Delegacion.......................................FINAL-->
 
     <script>
         document.addEventListener('DOMContentLoaded',()=>{
             const capturarElValorDeLaURL = new URLSearchParams(window.location.search)
-            const dniValor = capturarElValorDeLaURL.get('DNI_PASTOR_DELEGACION_GET') // Cambiar estos Nombres Muy indefinidos...
+            const valorDNI = capturarElValorDeLaURL.get('DNI_PASTOR_DELEGACION_GET')
 
             const datoDelCampoTxtClaveValor=new FormData()
-            datoDelCampoTxtClaveValor.append('dniPastorEnviarPhp_POST',dniValor) // Cambiar estos Nombres Muy indefinidos...
+            datoDelCampoTxtClaveValor.append('claveDniPastorParaScriptPHP',valorDNI)
 
             fetch('../../admin/crud/read/24_AdministrarDelegacionDeEstePastor_PHP.php', {method:'POST', body:datoDelCampoTxtClaveValor})
             .then(response => response.json())
@@ -82,8 +109,11 @@
                 document.getElementById('txtNombreAnfitrionArmarDelegacionID').value = valoresDePHP.anfitrion
                 document.getElementById('txtCelularAnfitrionArmarDelegacionID').value= valoresDePHP.celular
                 document.getElementById('txtMesaAsignadaArmarDelegacionID').value    = valoresDePHP.mesa
-
                 document.getElementById('txtNombreDeLaEsposaDelPastorID').value      = valoresDePHP.esposa
+                // Estos campos de texto son del ModalDialog Asignar Hospedaje a Pastor con el Anfitrion Hospedero
+                document.getElementById('txtDniPastorConstruirHospedajeCopiaID').value = valoresDePHP.dni
+                document.getElementById('txtNombrePastorConstruirHospedajeCopiaID').value = valoresDePHP.nombre
+                document.getElementById('txtCategoriaPastorConstruirHospedajeCopiaID').value = valoresDePHP.categoria
 
                 // ------------------------- Delegados -------------------------
                 let filasDelegados = ''
@@ -105,8 +135,48 @@
                     </tr>`
                 })
                 document.getElementById('DescargarAquiLosDatosDelHijoTblBody').innerHTML = filasHijos
+
+                // ------------------------- Boton-Icono Asignar Hospedaje Si No Lo Tiene -------------------------
+                document.getElementById('btnAsignarHospedajePastorID').style.display = 
+                document.getElementById('txtNombreAnfitrionArmarDelegacionID').value.trim() === '' ? 'inline-block' : 'none'
+
+                // ------------------------- Boton-Icono Asignar Mesa Si No Lo Tiene ------------------------------
+                document.getElementById('btnAsignarMesaPastorID').style.display = 
+                document.getElementById('txtMesaAsignadaArmarDelegacionID').value.trim() === '' ? 'inline-block' : 'none'
             })
         })
     </script>
+
+    <!--Carga la lista de tbl_anfitrion (ID, NombreAnfitrion) y busca el nombre del anfitrion taypeado en el campo de texto....INICIO-->
+    <script>
+        obtenerDatosAnfitrion()
+        document.getElementById('txtBuscarNombreAnfitrionHospederoID').addEventListener('keyup',obtenerDatosAnfitrion)
+        function obtenerDatosAnfitrion(){
+            const caracterDelCampoTxtClaveValor=new FormData()
+            caracterDelCampoTxtClaveValor.append('NOMBRE_ANFITRION_BUSQUEDA_PHP',document.getElementById('txtBuscarNombreAnfitrionHospederoID').value)
+
+            // Si el campo de texto NOMBRE ANFITRION Esta Nulo o en blanco, el valor del campo de texto ID ANFITRION sera 0..... 
+            if (document.getElementById('txtBuscarNombreAnfitrionHospederoID').value===''||
+                document.getElementById('txtBuscarNombreAnfitrionHospederoID').value=== null){
+                document.getElementById('txtIdAnfitrionHospederoID').value = '0'}
+
+            fetch('../../admin/crud/read/25_SeleccionarListaAnfitrionesHospederos_PHP.php',{method:'POST',body:caracterDelCampoTxtClaveValor})
+            .then(response=>response.json())
+            .then(valoresDePHP=>{
+            document.getElementById('tblCargarRegistrosDeTodosLosAnfitrionesID').innerHTML=valoresDePHP})
+        }
+    </script>
+    <!--Carga la lista de tbl_anfitrion (ID, NombreAnfitrion) y busca el nombre del anfitrion taypeado en el campo de texto......FINAL-->
+
+    <!--Obtener Valores De La Fila Clickeada ShowModalDialog Construir Hospedaje Para DELEGACION PASTOR CON ANFITRION......INICIO-->
+    <script>
+        function obtenerValoresDeLaFilaClickeada(fila){
+            document.getElementById('txtIdAnfitrionHospederoID').value              = fila.cells[0].innerHTML
+            document.getElementById('txtBuscarNombreAnfitrionHospederoID').value    = fila.cells[1].innerHTML
+        }
+    </script>
+    <!--Obtener Valores De La Fila Clickeada ShowModalDialog Construir Hospedaje Para DELEGACION PASTOR CON ANFITRION........FINAL-->
+
+    <script type="module"src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.esm.js"></script>
 </body>
 </html>

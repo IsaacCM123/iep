@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/../../core/1_conexion.php';
 
-$dni = $_POST['dniPastorEnviarPhp_POST'];
+$dni = $_POST['claveDniPastorParaScriptPHP'];
 
 $Seleccionar = "SELECT      p.nombreCompleto,
                             p.categoria,
