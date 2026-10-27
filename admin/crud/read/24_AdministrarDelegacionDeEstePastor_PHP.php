@@ -25,16 +25,18 @@ $Seleccionar = "SELECT      p.nombreCompleto,
                 LEFT JOIN   tbl_mesa m        ON m.idMesa           = p.FK_idMesa
                 WHERE       p.dniPastor = '$dni'";
 
-$SeleDelegados = "SELECT    nombreDelegado,
-                            cedulaIdentidad,
-                            FK_idMesa
-                FROM        tbl_delegado
-                WHERE       FK_dniPastor = '$dni'";
+$SeleDelegados = "SELECT    d.nombreDelegado,
+                            d.cedulaIdentidad,
+                            m.nombreMesa
+                FROM        tbl_delegado d
+                LEFT JOIN   tbl_mesa m ON m.idMesa = d.FK_idMesa
+                WHERE       d.FK_dniPastor = '$dni'";
 
-$SeleHijos =    "SELECT     nombreHijo,
-                            FK_idMesa
-                FROM        tbl_hijo
-                WHERE       FK_dniPastor = '$dni'";
+$SeleHijos =    "SELECT     h.nombreHijo,
+                            m.nombreMesa
+                FROM        tbl_hijo h
+                LEFT JOIN   tbl_mesa m ON m.idMesa = h.FK_idMesa
+                WHERE       h.FK_dniPastor = '$dni'";
 
 $resultado = mysqli_query($conexion,$Seleccionar);
 
@@ -68,7 +70,7 @@ if ($ResulDele){
         $delegados[] = [
             'nombre'     => $fila['nombreDelegado'],
             'cedula'     => $fila['cedulaIdentidad'],
-            'mesa'       => $fila['FK_idMesa']
+            'mesa'       => $fila['nombreMesa']
         ];
     }
 }
@@ -78,7 +80,7 @@ if ($ResulHijo){
     while ($fila = mysqli_fetch_assoc($ResulHijo)) {
         $hijos[] = [
             'nombre'    => $fila['nombreHijo'],
-            'mesa'      => $fila['FK_idMesa']
+            'mesa'      => $fila['nombreMesa']
         ];
     }
 }
