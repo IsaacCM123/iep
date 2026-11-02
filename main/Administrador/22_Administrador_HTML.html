@@ -1,18 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title></title>
-</head>
-<body>
-<h3>Pagina de Administrador.......</h3>
-<a href="../../public/html/11_GestionarListaIglesia_HTML.html">Agregar-Buscar-Editar-Eliminar-IGLESIA</a><br><br>
-<a href="../../public/html/6_GestionarListaPastor_HTML.html">Agregar-Buscar-Editar-Baja-Eliminar-AsignarMesa-VerDelegación-PASTOR</a><br><br>
-<a href="../../public/html/16_PastorMinistraIglesia_HTML.html">PASTOR Ministra IGLESIA</a><br><br>
-<a href="#">Agregar-Buscar-Editar-Eliminar-CobijaPastor-ANFITRIÓN</a><br><br>
-<a href="#">Agregar-Buscar-Editar-Eliminar-VISITA</a><br><br>
-<a href="#">Agregar-Buscar-Editar-Eliminar-INVITADO</a><br><br>
-<a href="#">SEGURIDAD-ASAMBLEA</a><br><br>
-</body>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+		<h3>Pagina de Administrador.......</h3>
+		<a href="../../public/html/11_GestionarListaIglesia_HTML.html">Agregar-Buscar-Editar-Eliminar-IGLESIA</a><br><br>
+		<a href="../../public/html/6_GestionarListaPastor_HTML.html">Agregar-Buscar-Editar-Baja-Eliminar-AsignarMesa-VerDelegación-PASTOR</a><br><br>
+		<a href="../../public/html/16_PastorMinistraIglesia_HTML.html">PASTOR Ministra IGLESIA</a><br><br>
+		<a href="#">Agregar-Buscar-Editar-Eliminar-CobijaPastor-ANFITRIÓN</a><br><br>
+		<a href="#">Agregar-Buscar-Editar-Eliminar-VISITA</a><br><br>
+		<a href="#">Agregar-Buscar-Editar-Eliminar-INVITADO</a><br><br>
+		<a href="#">SEGURIDAD-ASAMBLEA</a><br><br>
+
+		<button command='show-modal'commandfor='abrirModalDialogActualizarRonda1Ronda2Comensales'>Actualizar Ronda De Comensales</button>
+		<dialog id="abrirModalDialogActualizarRonda1Ronda2Comensales"closedby='any'>
+			<h3>Actualizar Ronda De Comensales</h3>
+			<span>Ronda </span><span id="span1AquiCargarElValorNumDeLaBDRondaID"></span><br><br>
+			<form method="POST"action="../../admin/crud/update/31_ActualizarRondaComensales_PHP.php">
+				<select name="RONDA_POST"id="selectAquiCargarElValorDeLaBDRondaID">
+				    <option value="1">1ra Ronda</option>
+				    <option value="2">2da Ronda</option>
+				</select><br><br>
+				<input type="button"id="btnCerrarModalDialogCambiarRondaID"value="Cancelar">
+				<input type="submit"value="Guardar Cambio">
+			</form>
+		</dialog>
+
+		<script>
+			document.getElementById('btnCerrarModalDialogCambiarRondaID').addEventListener('click',()=>{
+			document.getElementById('abrirModalDialogActualizarRonda1Ronda2Comensales').close()})
+		</script>
+
+		<script>
+			fetch('../../admin/crud/read/32_SeleccionarRondaDeComensales_PHP.php',{method:'POST'})
+            .then(response=>response.json())
+            .then(valorDelPHP=>{
+                document.getElementById('selectAquiCargarElValorDeLaBDRondaID').value=valorDelPHP.ronda
+            	document.getElementById('span1AquiCargarElValorNumDeLaBDRondaID').textContent=valorDelPHP.ronda})
+		</script>
+	</body>
 </html>

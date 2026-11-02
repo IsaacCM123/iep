@@ -8,6 +8,22 @@
 <body>
     <h1>Construir Delegación De Este Pastor:</h1><ion-icon name="extension-puzzle-sharp"></ion-icon><br>
 
+    <!--Este bloque hace enfasis al ordenamiento de comensales: desayuno, almuerzo, cena..........................INICIO-->
+    <fieldset>
+        <legend>Ronda: <span id="span2AquiCargarElValorNumDeLaBDRondaID"></span></legend>
+        <div id="divRondaUnoID">
+            <strong>Desayuno: 8:00 AM</strong><br>
+            <strong>Almuerzo: 12:00 PM</strong><br>
+            <strong>Cena: 17:00 PM</strong>
+        </div>
+        <div id="divRondaDosID">
+            <strong>Desayuno: 9:00 AM</strong><br>
+            <strong>Almuerzo: 13:00 PM</strong><br>
+            <strong>Cena: 18:00 PM</strong>
+        </div>
+    </fieldset>
+    <!--Este bloque hace enfasis al ordenamiento de comensales: desayuno, almuerzo, cena............................FINAL-->
+
     <fieldset>
         <legend>Datos Del Pastor - Presidente De La Delegación.</legend>
         <input type="text"id="txtDniPastorArmarDelegacionID"readonly><br>
@@ -293,6 +309,22 @@
     </dialog>
     <!--CAMPO DE LOS HIJOS..............................................................................................FINAL-->
 
+
+    <!--Este bloque hace enfasis al ordenamiento de comensales: desayuno, almuerzo, cena..........................INICIO-->
+    <script>
+        fetch('../../admin/crud/read/32_SeleccionarRondaDeComensales_PHP.php',{method:'POST'})
+        .then(response=>response.json())
+        .then(valorDelPHP=>{
+            const ronda = String(valorDelPHP.ronda)
+            document.getElementById('span2AquiCargarElValorNumDeLaBDRondaID').textContent=ronda
+
+            document.getElementById('divRondaUnoID').style.display = (ronda === '1') ? 'block' : 'none'
+            document.getElementById('divRondaDosID').style.display = (ronda === '2') ? 'block' : 'none'
+        })
+    </script>
+    <!--Este bloque hace enfasis al ordenamiento de comensales: desayuno, almuerzo, cena............................FINAL-->
+
+
     <!--Solamente es cerrar Modal Dialog Para Construir Delegacion.......................................INICIO-->
     <script>
         document.getElementById('btnCerrarModalDialogConstruirHospedajeID').addEventListener('click',()=>{
@@ -456,5 +488,11 @@
     <script src="../js/23_ConstruirDelegacionDePastorADM_AgreActuImprElim/2_Delegado/2_VistaPreviaDatosDelegadoEliminarRegistro.js"></script>
     <script src="../js/23_ConstruirDelegacionDePastorADM_AgreActuImprElim/3_Esposa/2_VistaPreviaDatosEsposaEliminarRegistro.js"></script>
     <script src="../js/23_ConstruirDelegacionDePastorADM_AgreActuImprElim/4_Hijo/2_VistaPreviaDatosHijoEliminarRegistro.js"></script>
+    <!--.......Imprimir.......-->
+    <script src="../js/23_ConstruirDelegacionDePastorADM_AgreActuImprElim/2_Delegado/3_VistaPreviaDatosDelegadoImprimirRegistro.js"></script>
+    <script src="../js/23_ConstruirDelegacionDePastorADM_AgreActuImprElim/3_Esposa/3_VistaPreviaDatosEsposaImprimirRegistro.js"></script>
+    <script src="../js/23_ConstruirDelegacionDePastorADM_AgreActuImprElim/4_Hijo/3_VistaPreviaDatosHijoImprimirRegistro.js"></script>
+
+    
 </body>
 </html>
