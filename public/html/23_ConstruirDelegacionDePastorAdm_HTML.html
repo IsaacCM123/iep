@@ -8,21 +8,21 @@
 <body>
     <h1>Construir Delegación De Este Pastor:</h1><ion-icon name="extension-puzzle-sharp"></ion-icon><br>
 
-    <!--Este bloque hace enfasis al ordenamiento de comensales: desayuno, almuerzo, cena..........................INICIO-->
+    <!--Este bloque hace enfasis al CRONOGRAMA GASTRONOMICO: desayuno, almuerzo, cena..........................INICIO-->
     <fieldset>
         <legend>Ronda: <span id="span2AquiCargarElValorNumDeLaBDRondaID"></span></legend>
         <div id="divRondaUnoID">
-            <strong>Desayuno: 8:00 AM</strong><br>
-            <strong>Almuerzo: 12:00 PM</strong><br>
-            <strong>Cena: 17:00 PM</strong>
+            <strong id="strongHorarioDelDesayunoID">Desayuno: 8:00 AM</strong><br>
+            <strong id="strongHorarioDelAlmuerzoID">Almuerzo: 12:00 PM</strong><br>
+            <strong id="strongHorarioDeLaCenaID">Cena: 17:00 PM</strong>
         </div>
         <div id="divRondaDosID">
-            <strong>Desayuno: 9:00 AM</strong><br>
-            <strong>Almuerzo: 13:00 PM</strong><br>
-            <strong>Cena: 18:00 PM</strong>
+            <strong id="strongHorarioDelDesayunoID">Desayuno: 9:00 AM</strong><br>
+            <strong id="strongHorarioDelAlmuerzoID">Almuerzo: 13:00 PM</strong><br>
+            <strong id="strongHorarioDeLaCenaID">Cena: 18:00 PM</strong>
         </div>
     </fieldset>
-    <!--Este bloque hace enfasis al ordenamiento de comensales: desayuno, almuerzo, cena............................FINAL-->
+    <!--Este bloque hace enfasis al CRONOGRAMA GASTRONOMICO: desayuno, almuerzo, cena............................FINAL-->
 
     <fieldset>
         <legend>Datos Del Pastor - Presidente De La Delegación.</legend>
@@ -318,8 +318,8 @@
             const ronda = String(valorDelPHP.ronda)
             document.getElementById('span2AquiCargarElValorNumDeLaBDRondaID').textContent=ronda
 
-            document.getElementById('divRondaUnoID').style.display = (ronda === '1') ? 'block' : 'none'
-            document.getElementById('divRondaDosID').style.display = (ronda === '2') ? 'block' : 'none'
+            document.getElementById('divRondaUnoID').style.display = (ronda === '1') ? 'block' : document.getElementById('divRondaUnoID').remove()
+            document.getElementById('divRondaDosID').style.display = (ronda === '2') ? 'block' : document.getElementById('divRondaDosID').remove()
         })
     </script>
     <!--Este bloque hace enfasis al ordenamiento de comensales: desayuno, almuerzo, cena............................FINAL-->

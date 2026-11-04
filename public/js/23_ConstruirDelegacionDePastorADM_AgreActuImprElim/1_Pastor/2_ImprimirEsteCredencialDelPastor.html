@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0px;
+			box-sizing: border-box;
+			text-decoration: none;
+			font-family: sans-serif;
+		}
+		#portada{
+			width: 323px;
+			height: 454px;
+			position: relative;
+			margin: 0px 0px 0px 0px;
+			overflow: hidden;
+		}
+		#imagenPortada{
+			position: absolute;
+			width: 100%;
+			height: 100%;
+		}
+		span{
+			position: absolute;
+		}
+	</style>
+</head>
+<body>
+	<div id="portada">
+		<img id="imagenPortada" src="1.png">
+		<span id="spanNombreDelPastorID"></span><br>
+		<span id="spanCategoriaDelPastorID"></span><br>
+		<span id="spanExtraDelPastorID"></span><br>
+		<span id="spanTelefonoDelPastorID"></span><br><br>
+
+		<span id="spanNombreDeLaIglesiaID"></span><br>
+		<span id="spanCiudadDeLaIglesiaID"></span><br>
+		<span id="spanPaisDeLaIglesiaID"></span><br><br>
+
+		<span id="spanNombreDelHospedadorID"></span><br>
+		<span id="spanCelularDelHospedadorID"></span><br><br>
+
+		<span id="spanAsignarMesaPastorID"></span><br><br>
+
+		<span id="spanHorarioDelDesayunoID"></span><br>
+		<span id="spanHorarioDelAlmuerzoID"></span><br>
+		<span id="spanHorarioDeLaCenaID"></span><br>	
+	</div>
+	
+
+	<script>
+		const capturarLosDatosEnviadosALaURL = new URLSearchParams(window.location.search)
+
+		document.getElementById("spanNombreDelPastorID").textContent=capturarLosDatosEnviadosALaURL.get("NOMBRE_PASTOR_GET_IMP")
+		document.getElementById("spanCategoriaDelPastorID").textContent=capturarLosDatosEnviadosALaURL.get("CATEGORIA_PASTOR_GET_IMP")
+		document.getElementById("spanExtraDelPastorID").textContent=capturarLosDatosEnviadosALaURL.get("EXTRA_PASTOR_GET_IMP")
+		document.getElementById("spanTelefonoDelPastorID").textContent=capturarLosDatosEnviadosALaURL.get("TELEFONO_PASTOR_GET_IMP")
+
+		document.getElementById("spanNombreDeLaIglesiaID").textContent=capturarLosDatosEnviadosALaURL.get("NOMBRE_IGLESIA_GET_IMP")
+		document.getElementById("spanCiudadDeLaIglesiaID").textContent=capturarLosDatosEnviadosALaURL.get("CIUDAD_IGLESIA_GET_IMP")
+		document.getElementById("spanPaisDeLaIglesiaID").textContent=capturarLosDatosEnviadosALaURL.get("PAIS_IGLESIA_GET_IMP")
+
+		document.getElementById("spanNombreDelHospedadorID").textContent=capturarLosDatosEnviadosALaURL.get("NOMBRE_HOSPEDADOR_GET_IMP")
+		document.getElementById("spanCelularDelHospedadorID").textContent=capturarLosDatosEnviadosALaURL.get("CELULAR_HOSPEDADOR_GET_IMP")
+
+		document.getElementById("spanAsignarMesaPastorID").textContent=capturarLosDatosEnviadosALaURL.get("ASIGNAR_MESA_PASTOR_GET_IMP")
+
+		document.getElementById("spanHorarioDelDesayunoID").textContent=capturarLosDatosEnviadosALaURL.get("HORARIO_DESAYUNO_GET_IMP")
+		document.getElementById("spanHorarioDelAlmuerzoID").textContent=capturarLosDatosEnviadosALaURL.get("HORARIO_ALMUERZO_GET_IMP")
+		document.getElementById("spanHorarioDeLaCenaID").textContent=capturarLosDatosEnviadosALaURL.get("HORARIO_DELACENA_GET_IMP")
+	</script>
+</body>
+</html>
